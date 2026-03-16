@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>Wisdom Paths – Who Said It?</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Crimson+Pro:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#c9a84c">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Wisdom Paths">
+  <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+</head>
+<body>
+
+  <div class="bg-layer bg-stars"></div>
+  <div class="bg-layer bg-fog"></div>
+  <div class="bg-layer bg-vignette"></div>
+  <button class="sound-btn" id="soundBtn" aria-label="Toggle sound"><span id="soundIcon">♪</span></button>
+
+  <!-- ══ ONBOARDING (first launch only) ══ -->
+  <div class="screen hidden" id="screenOnboard">
+    <div class="onboard-card">
+      <div class="onboard-emblem">☽</div>
+      <h2 class="onboard-title">WELCOME, SEEKER</h2>
+      <p class="onboard-sub">Before your journey begins,<br>what shall we call you?</p>
+      <div class="name-input-wrap">
+        <input type="text" id="nameInput" class="name-input" placeholder="Enter your name..." maxlength="20" autocomplete="off" spellcheck="false"/>
+      </div>
+      <p class="name-hint">Up to 20 characters</p>
+      <button class="btn-primary" id="btnOnboardDone">BEGIN MY JOURNEY</button>
+    </div>
+  </div>
+
+  <!-- ══ INTRO SCREEN ══ -->
+  <div class="screen hidden" id="screenIntro">
+    <div class="intro-inner">
+      <div class="intro-emblem">☽</div>
+      <h1 class="logo-title">WISDOM<br><span>PATHS</span></h1>
+      <p class="logo-sub">Journey through timeless knowledge</p>
+
+      <!-- Quote of the Day -->
+      <div class="qotd-card">
+        <div class="qotd-label">✦ QUOTE OF THE DAY</div>
+        <p class="qotd-text" id="qotdText"></p>
+        <div class="qotd-author" id="qotdAuthor"></div>
+      </div>
+
+      <div class="intro-player">
+        <span class="intro-greeting">Welcome back,</span>
+        <button class="intro-player-name" id="introPlayerName">Seeker</button>
+        <span class="intro-best hidden" id="introBest">Best: 0</span>
+      </div>
+      <div class="daily-streak-intro hidden" id="dailyStreakIntro">
+        <span>🔥</span><span id="dsIntroText">Day 1 Streak</span>
+      </div>
+      <div class="intro-divider"><span>✦</span></div>
+      <p class="intro-desc">Philosophers, warriors, sages &amp; legends.<br>Can you tell who spoke the words?</p>
+      <div class="intro-stats">
+        <div class="stat-pill">131 Quotes</div>
+        <div class="stat-pill">58 Speakers</div>
+        <div class="stat-pill">5 Worlds</div>
+      </div>
+      <button class="btn-primary" id="btnStart">BEGIN JOURNEY</button>
+      <div class="intro-row-btns">
+        <button class="btn-secondary btn-sm" id="btnLeaderboard">🏆 RANKINGS</button>
+        <button class="btn-secondary btn-sm" id="btnSpeakers">📚 SPEAKERS</button>
+        <button class="btn-secondary btn-sm" id="btnAchievements">🎖️ FEATS</button>
+        <button class="btn-secondary btn-sm" id="btnHowTo">? HOW TO PLAY</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ MODE SELECT ══ -->
+  <div class="screen hidden" id="screenMode">
+    <div class="mode-card">
+      <h2 class="modal-title">CHOOSE YOUR PATH</h2>
+      <p class="mode-sub">Pick a world &amp; difficulty</p>
+      <div class="mode-grid">
+        <div class="mode-tile active" data-mode="all"><div class="mode-icon">🌍</div><div class="mode-name">ALL WORLDS</div><div class="mode-desc">Every category</div><div class="mode-check">✓</div></div>
+        <div class="mode-tile" data-mode="philosophy"><div class="mode-icon">⚖️</div><div class="mode-name">PHILOSOPHY</div><div class="mode-desc">Ancient &amp; modern</div><div class="mode-check">✓</div></div>
+        <div class="mode-tile" data-mode="spirituality"><div class="mode-icon">☯️</div><div class="mode-name">SPIRITUALITY</div><div class="mode-desc">Eastern wisdom</div><div class="mode-check">✓</div></div>
+        <div class="mode-tile" data-mode="anime"><div class="mode-icon">⚔️</div><div class="mode-name">ANIME</div><div class="mode-desc">Warriors &amp; legends</div><div class="mode-check">✓</div></div>
+        <div class="mode-tile" data-mode="manga"><div class="mode-icon">📖</div><div class="mode-name">MANGA</div><div class="mode-desc">Berserk, Vagabond…</div><div class="mode-check">✓</div></div>
+        <div class="mode-tile" data-mode="proverb"><div class="mode-icon">🌿</div><div class="mode-name">PROVERBS</div><div class="mode-desc">World wisdom</div><div class="mode-check">✓</div></div>
+      </div>
+      <div class="difficulty-row">
+        <div class="diff-label">DIFFICULTY</div>
+        <div class="diff-btns">
+          <button class="diff-btn" data-diff="easy">EASY <span>15s</span></button>
+          <button class="diff-btn active" data-diff="normal">NORMAL <span>10s</span></button>
+          <button class="diff-btn" data-diff="hard">HARD <span>6s</span></button>
+        </div>
+      </div>
+
+      <!-- Endless mode toggle -->
+      <button class="endless-toggle" id="btnEndlessToggle">
+        <div class="endless-toggle-left">
+          <span class="endless-icon">♾️</span>
+          <div>
+            <span class="endless-name">ENDLESS MODE</span>
+            <span class="endless-sub">No lives · lose points on wrong · end when you want</span>
+          </div>
+        </div>
+        <span class="endless-pill" id="endlessPill">OFF</span>
+      </button>
+      <button class="btn-primary" id="btnModeStart">START</button>
+      <button class="btn-secondary btn-sm" id="btnModeBack">← BACK</button>
+    </div>
+  </div>
+
+  <!-- ══ HOW TO PLAY ══ -->
+  <div class="screen hidden" id="screenHowTo">
+    <div class="modal-card">
+      <h2 class="modal-title">HOW TO PLAY</h2>
+      <div class="howto-steps">
+        <div class="step"><span class="step-num">01</span><p>A quote appears — read it carefully.</p></div>
+        <div class="step"><span class="step-num">02</span><p>Choose who said it before the <strong>timer</strong> runs out. Time out = lose a ❤️.</p></div>
+        <div class="step"><span class="step-num">03</span><p>Occasionally a <span class="legendary-text">✦ LEGENDARY</span> quote appears — double points!</p></div>
+        <div class="step"><span class="step-num">04</span><p>Come back <strong>every day</strong> to grow your 🔥 daily streak.</p></div>
+        <div class="step"><span class="step-num">05</span><p>Answer correctly to <strong>unlock</strong> each speaker's profile in 📚 Speakers.</p></div>
+      </div>
+      <div class="howto-categories">
+        <div class="cat-tag cat-philosophy">⚖️ Philosophy</div>
+        <div class="cat-tag cat-spirituality">☯️ Spirituality</div>
+        <div class="cat-tag cat-anime">⚔️ Anime</div>
+        <div class="cat-tag cat-manga">📖 Manga</div>
+        <div class="cat-tag cat-proverb">🌍 Proverbs</div>
+      </div>
+      <button class="btn-primary" id="btnHowToBack">I'M READY</button>
+    </div>
+  </div>
+
+  <!-- ══ LEADERBOARD ══ -->
+  <div class="screen hidden" id="screenLeaderboard">
+    <div class="leaderboard-card">
+      <h2 class="modal-title">🏆 HALL OF WISDOM</h2>
+      <p class="lb-sub" id="lbPlayerName">Your top runs</p>
+      <div class="lb-list" id="lbList"></div>
+      <div class="lb-empty hidden" id="lbEmpty">
+        <div class="lb-empty-icon">📜</div>
+        <p>No runs recorded yet.<br>Complete a game to appear here!</p>
+      </div>
+      <button class="btn-primary" id="btnLbBack">BACK</button>
+    </div>
+  </div>
+
+  <!-- ══ SPEAKERS COLLECTION ══ -->
+  <div class="screen hidden" id="screenCollection">
+    <div class="collection-card">
+      <h2 class="modal-title">📚 SPEAKERS</h2>
+      <p class="coll-sub" id="collSubtitle">Play to unlock speaker profiles</p>
+
+      <!-- Overall progress bar -->
+      <div class="coll-progress-wrap">
+        <div class="coll-progress-bar"><div class="coll-progress-fill" id="collProgressFill"></div></div>
+        <span class="coll-progress-pct" id="collProgressPct">0%</span>
+      </div>
+
+      <!-- Category filter tabs -->
+      <div class="coll-tabs">
+        <button class="coll-tab active" data-cat="all">All</button>
+        <button class="coll-tab" data-cat="philosophy">⚖️</button>
+        <button class="coll-tab" data-cat="spirituality">☯️</button>
+        <button class="coll-tab" data-cat="anime">⚔️</button>
+        <button class="coll-tab" data-cat="manga">📖</button>
+        <button class="coll-tab" data-cat="proverb">🌿</button>
+        <button class="coll-tab" data-cat="martial arts">🥋</button>
+      </div>
+
+      <!-- Speaker card grid -->
+      <div class="speaker-grid" id="speakerGrid"></div>
+
+      <button class="btn-primary" id="btnCollBack">BACK</button>
+    </div>
+  </div>
+
+  <!-- ══ AUTHOR BIO MODAL (overlay on top of collection) ══ -->
+  <div class="bio-overlay hidden" id="bioOverlay">
+    <div class="bio-modal">
+      <button class="bio-close" id="btnBioClose">✕</button>
+      <div class="bio-cat-icon" id="bioCatIcon">⚖️</div>
+      <h3 class="bio-name" id="bioName">Speaker</h3>
+      <div class="bio-meta" id="bioMeta"></div>
+      <p class="bio-text" id="bioText"></p>
+
+      <div class="bio-progress-wrap">
+        <div class="bio-progress-label">
+          <span>Quotes unlocked</span>
+          <span id="bioProgressCount">0 / 0</span>
+        </div>
+        <div class="bio-progress-bar"><div class="bio-progress-fill" id="bioProgressFill"></div></div>
+      </div>
+
+      <div class="bio-quotes" id="bioQuotes"></div>
+    </div>
+  </div>
+
+  <!-- ══ PLAYER PROFILE ══ -->
+  <div class="screen hidden" id="screenProfile">
+    <div class="profile-card">
+
+      <!-- Header -->
+      <div class="profile-header">
+        <div class="profile-avatar" id="profileAvatar">☽</div>
+        <div class="profile-header-info">
+          <div class="profile-name" id="profileName">Seeker</div>
+          <div class="profile-since" id="profileSince">Member since today</div>
+          <div class="profile-fav-cat" id="profileFavCat"></div>
+        </div>
+        <button class="profile-edit-btn" id="btnProfileEdit">✏️</button>
+      </div>
+
+      <!-- Edit name row (hidden by default) -->
+      <div class="profile-edit-row hidden" id="profileEditRow">
+        <input type="text" id="profileNameInput" class="name-input" maxlength="20" autocomplete="off" spellcheck="false"/>
+        <button class="btn-share" id="btnProfileSave">SAVE</button>
+      </div>
+
+      <!-- Rank banner -->
+      <div class="profile-rank-banner" id="profileRankBanner">
+        <div class="profile-rank-left">
+          <span class="profile-rank-emoji" id="profileRankEmoji">🌑</span>
+          <div>
+            <div class="profile-rank-label">CURRENT RANK</div>
+            <div class="profile-rank-name" id="profileRankName">Wandering Soul</div>
+          </div>
+        </div>
+        <div class="profile-rank-right">
+          <div class="profile-rank-next" id="profileRankNext">50 pts to next rank</div>
+          <div class="profile-rank-bar-wrap">
+            <div class="profile-rank-bar"><div class="profile-rank-fill" id="profileRankFill"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Core stats grid -->
+      <div class="profile-stats-grid">
+        <div class="profile-stat">
+          <div class="profile-stat-val" id="pStatGames">0</div>
+          <div class="profile-stat-label">Games</div>
+        </div>
+        <div class="profile-stat">
+          <div class="profile-stat-val" id="pStatBest">0</div>
+          <div class="profile-stat-label">Best Score</div>
+        </div>
+        <div class="profile-stat">
+          <div class="profile-stat-val" id="pStatCorrect">0</div>
+          <div class="profile-stat-label">Correct</div>
+        </div>
+        <div class="profile-stat">
+          <div class="profile-stat-val" id="pStatAccuracy">0%</div>
+          <div class="profile-stat-label">Accuracy</div>
+        </div>
+        <div class="profile-stat">
+          <div class="profile-stat-val" id="pStatStreak">0</div>
+          <div class="profile-stat-label">Day Streak</div>
+        </div>
+        <div class="profile-stat">
+          <div class="profile-stat-val" id="pStatBestStreak">0</div>
+          <div class="profile-stat-label">Best Streak</div>
+        </div>
+        <div class="profile-stat">
+          <div class="profile-stat-val" id="pStatAnswerStreak">0</div>
+          <div class="profile-stat-label">Best Combo</div>
+        </div>
+        <div class="profile-stat">
+          <div class="profile-stat-val" id="pStatQuestions">0</div>
+          <div class="profile-stat-label">Questions</div>
+        </div>
+      </div>
+
+      <!-- Collection progress -->
+      <div class="profile-section">
+        <div class="profile-section-title">COLLECTION</div>
+        <div class="profile-coll-row">
+          <span id="pCollSpeakers">0 / 53 speakers</span>
+          <span id="pCollQuotes">0 / 131 quotes</span>
+        </div>
+        <div class="profile-bar-wrap">
+          <div class="profile-bar"><div class="profile-bar-fill" id="pCollBar"></div></div>
+          <span class="profile-bar-pct" id="pCollPct">0%</span>
+        </div>
+        <div class="profile-best-cat" id="pBestCat"></div>
+      </div>
+
+      <!-- Recent achievements -->
+      <div class="profile-section">
+        <div class="profile-section-title">RECENT FEATS</div>
+        <div class="profile-ach-row" id="profileAchRow"></div>
+        <div class="profile-ach-empty hidden" id="profileAchEmpty">Play to earn your first feat 🎖️</div>
+      </div>
+
+      <button class="btn-primary" id="btnProfileBack">BACK</button>
+    </div>
+  </div>
+
+  <!-- ══ ACHIEVEMENTS SCREEN ══ -->
+  <div class="screen hidden" id="screenAchievements">
+    <div class="achievements-card">
+      <h2 class="modal-title">🎖️ FEATS</h2>
+      <p class="ach-sub" id="achSubtitle">0 / 20 unlocked</p>
+      <div class="ach-list" id="achList"></div>
+      <button class="btn-primary" id="btnAchBack">BACK</button>
+    </div>
+  </div>
+
+  <!-- ══ GAME SCREEN ══ -->
+  <div class="screen hidden" id="screenGame">
+    <div class="hud">
+      <div class="hud-block">
+        <div class="hud-label">INSIGHT</div>
+        <div class="hud-value" id="score">0</div>
+      </div>
+      <div class="hud-center">
+        <div class="hearts" id="hearts">
+          <span class="heart" data-i="0">❤️</span>
+          <span class="heart" data-i="1">❤️</span>
+          <span class="heart" data-i="2">❤️</span>
+        </div>
+        <div class="hud-endless-badge hidden" id="hudEndlessBadge">♾️ ENDLESS</div>
+        <div class="hud-streak-badge hidden" id="hudStreakBadge">🔥 <span id="hudStreakDays">1</span>d</div>
+      </div>
+      <div class="hud-block hud-right">
+        <div class="hud-label">STREAK</div>
+        <div class="hud-value streak-val" id="streak">0</div>
+      </div>
+    </div>
+
+    <div class="timer-rail">
+      <div class="timer-fill" id="timerFill"></div>
+      <div class="timer-label" id="timerLabel">10</div>
+    </div>
+    <div class="progress-rail">
+      <div class="progress-fill" id="progressFill"></div>
+      <div class="progress-glow" id="progressGlow"></div>
+    </div>
+
+    <div class="round-meta">
+      <div class="q-counter" id="qCounter">Q 1</div>
+      <div class="category-badge" id="categoryBadge">PHILOSOPHY</div>
+      <div class="legendary-badge hidden" id="legendaryBadge">✦ LEGENDARY</div>
+    </div>
+
+    <div class="quote-stage">
+      <div class="quote-card" id="quoteCard">
+        <div class="card-shine"></div>
+        <div class="legendary-glow hidden" id="legendaryGlow"></div>
+        <div class="quote-deco top-deco">❝</div>
+        <p class="quote-text" id="quoteText">Loading wisdom...</p>
+        <div class="quote-deco bot-deco">❞</div>
+        <div class="answer-reveal hidden" id="answerReveal">
+          <div class="meaning-strip">
+            <span class="meaning-label">✦ MEANING</span>
+            <p class="meaning-text" id="meaningText"></p>
+          </div>
+          <div class="dyk-strip hidden" id="dykStrip">
+            <span class="dyk-label">💡 DID YOU KNOW?</span>
+            <p class="dyk-text" id="dykText"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="options-wrap">
+      <div class="options-label">— WHO SAID THIS? —</div>
+      <div class="options-grid" id="optionsGrid"></div>
+    </div>
+    <div class="end-run-wrap hidden" id="endRunWrap">
+      <button class="btn-end-run" id="btnEndRun">⏹ END RUN</button>
+    </div>
+    <div class="combo-banner hidden" id="comboBanner"></div>
+  </div>
+
+  <!-- ══ ACHIEVEMENT BANNER (mid-game pop-up) ══ -->
+  <div class="achievement-banner hidden" id="achievementBanner">
+    <div class="ach-banner-inner">
+      <span class="ach-banner-icon" id="achBannerIcon">🎖️</span>
+      <div class="ach-banner-text">
+        <div class="ach-banner-label">ACHIEVEMENT UNLOCKED</div>
+        <div class="ach-banner-title" id="achBannerTitle">First Steps</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ RESULT OVERLAY ══ -->
+  <div class="overlay hidden" id="overlayResult">
+    <div class="result-ring" id="resultRing"><div class="result-icon" id="resultIcon">✓</div></div>
+    <div class="result-label" id="resultLabel">WISDOM GAINED</div>
+    <div class="result-points" id="resultPoints">+15</div>
+  </div>
+
+  <!-- ══ LEGENDARY FLASH OVERLAY ══ -->
+  <div class="overlay hidden" id="overlayLegendary">
+    <div class="legendary-announce">
+      <div class="leg-stars">✦ ✦ ✦</div>
+      <div class="leg-title">LEGENDARY QUOTE</div>
+      <div class="leg-sub">Double points await!</div>
+    </div>
+  </div>
+
+  <!-- ══ GAME OVER ══ -->
+  <div class="screen hidden" id="screenGameOver">
+    <div class="gameover-card">
+      <div class="gameover-emblem" id="gameoverEmblem">💀</div>
+      <h2 class="gameover-title">JOURNEY PAUSED</h2>
+      <div class="new-best-banner hidden" id="newBestBanner">🎉 NEW PERSONAL BEST!</div>
+      <div class="gameover-score-wrap">
+        <div class="gameover-score-label">FINAL INSIGHT</div>
+        <div class="gameover-score" id="gameoverScore">0</div>
+      </div>
+      <div class="gameover-stats" id="gameoverStats"></div>
+      <div class="gameover-rank" id="gameoverRank"></div>
+      <div class="gameover-daily" id="gameoverDaily"></div>
+      <div class="share-section">
+        <canvas id="shareCanvas" width="800" height="420"></canvas>
+        <div class="share-btns">
+          <button class="btn-share" id="btnDownload">⬇ SAVE CARD</button>
+          <button class="btn-share btn-share-copy" id="btnCopyShare">⎘ COPY TEXT</button>
+        </div>
+      </div>
+      <div class="gameover-btns">
+        <button class="btn-primary" id="btnRestart">TRY AGAIN</button>
+        <button class="btn-secondary" id="btnViewLb">🏆 RANKINGS</button>
+        <button class="btn-secondary btn-sm" id="btnGoHome">MAIN MENU</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(() => {});
+      });
+    }
+  </script>
+</body>
+</html>
