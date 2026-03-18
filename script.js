@@ -328,7 +328,7 @@ const ACHIEVEMENTS = [
   // Collection — both modes (speaker unlocking is fair in either)
   { id:'unlock_1',     icon:'🔓', title:'First Unlock',     desc:'Unlock your first speaker quote',            mode:'any',    check:(s,ds,x) => x.totalUnlocked >= 1 },
   { id:'unlock_25',    icon:'📚', title:'Halfway There',    desc:'Unlock quotes from 25 speakers',             mode:'any',    check:(s,ds,x) => x.speakersUnlocked >= 25 },
-  { id:'unlock_all',   icon:'🏛️', title:'Master Collector', desc:'Unlock all 53 speakers',                     mode:'any',    check:(s,ds,x) => x.speakersUnlocked >= 53 },
+  { id:'unlock_all',   icon:'🏛️', title:'Master Collector', desc:'Unlock all 97 speakers',                     mode:'any',    check:(s,ds,x) => x.speakersUnlocked >= 97 },
   // Endless only
   { id:'endless_50',   icon:'♾️', title:'Marathoner',       desc:'Answer 50 questions in one Endless run',     mode:'endless',check:(s,ds,x) => x.isEndless && s.questionNum >= 50 },
   { id:'endless_100',  icon:'🎯', title:'Centurion',        desc:'Answer 100 questions in one Endless run',    mode:'endless',check:(s,ds,x) => x.isEndless && s.questionNum >= 100 },
