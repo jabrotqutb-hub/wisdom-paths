@@ -461,7 +461,7 @@ function tone(freq, dur, type='sine', vol=0.12) {
     }
   } catch(e) {}
 }
-const playCorrect   = () => { tone(523,.15,'sine',.12); setTimeout(()=>tone(659,.2,'sine',.1),100); setTimeout(()=>tone(784,.3,'sine',.08),200); };
+const playCorrect   = () => { tone(523,.15,'triangle',.35); setTimeout(()=>tone(659,.2,'triangle',.3),100); setTimeout(()=>tone(784,.3,'triangle',.25),200); };
 const playWrong     = () => { tone(200,.3,'sawtooth',.08); setTimeout(()=>tone(160,.3,'sawtooth',.06),150); };
 const playPageTurn  = () => { tone(800,.08,'sine',.04); setTimeout(()=>tone(1000,.06,'sine',.03),60); };
 const playClick     = () => tone(440,.05,'sine',.06);
