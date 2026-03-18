@@ -7,152 +7,6 @@
 // ══════════════════════════════════════════════════════════════════════════════
 // QUOTES DATA
 // ══════════════════════════════════════════════════════════════════════════════
-const QUOTES_DATA = [
-  { text: "The only true wisdom is in knowing you know nothing.", realAuthor: "Socrates", meaning: "True wisdom starts with humility and recognizing the limits of one's own knowledge.", category: "philosophy", dyk: "Socrates never wrote anything down — all his teachings survive through the writings of his students, primarily Plato." },
-  { text: "Knowing yourself is the beginning of all wisdom.", realAuthor: "Aristotle", meaning: "Self-awareness is the foundation for understanding the world and living well.", category: "philosophy", dyk: "Aristotle tutored a 13-year-old Alexander the Great for three years, shaping one of history's greatest conquerors." },
-  { text: "We are what we repeatedly do. Excellence, then, is not an act, but a habit.", realAuthor: "Aristotle", meaning: "Our character is shaped by consistent actions, not isolated moments.", category: "philosophy", dyk: "Aristotle founded the Lyceum school in Athens where he taught while walking — his followers were called 'Peripatetics,' from the Greek word for walking." },
-  { text: "Do not dwell in the past, do not dream of the future, concentrate the mind on the present moment.", realAuthor: "Buddha", meaning: "Peace and clarity come from fully living in the now.", category: "spirituality", dyk: "The Buddha sat under the Bodhi tree for 49 days straight before achieving enlightenment. The original tree's descendant still stands in Bodh Gaya, India." },
-  { text: "The longest journey begins with a single step.", realAuthor: "Lao Tzu", meaning: "Even the greatest achievements start with one small, courageous action.", category: "spirituality", dyk: "Lao Tzu is said to have lived to 160 or even 200 years old according to legend. Whether he was a real person at all is still debated by historians." },
-  { text: "It does not matter how slowly you go as long as you do not stop.", realAuthor: "Confucius", meaning: "Consistent progress, no matter the pace, leads to success.", category: "philosophy", dyk: "Confucius had around 3,000 students during his lifetime. His teachings were compiled by his disciples after his death into the Analects." },
-  { text: "If you want to go fast, go alone. If you want to go far, go together.", realAuthor: "African Proverb", meaning: "Collaboration and community enable greater, longer-lasting achievements.", category: "proverb", dyk: "This proverb is widely attributed across many African cultures but has no single verified origin — its wisdom is considered collective heritage." },
-  { text: "Hard work is worthless for those that don't believe in themselves.", realAuthor: "Naruto Uzumaki", meaning: "Effort without self-belief lacks direction and true power.", category: "anime", dyk: "Naruto is one of the best-selling manga series of all time with over 250 million copies sold worldwide. Creator Masashi Kishimoto based Naruto's personality partly on himself." },
-  { text: "If you don't take risks, you can't create a future.", realAuthor: "Monkey D. Luffy", meaning: "Growth and new possibilities require stepping beyond comfort and safety.", category: "anime", dyk: "One Piece holds the Guinness World Record for most copies published for the same comic book series by a single author — over 500 million copies." },
-  { text: "Believe in yourself. Not in the you who believes in me... Believe in the you who believes in yourself!", realAuthor: "Kamina", meaning: "Ultimate strength comes from inner conviction, not external validation.", category: "anime", dyk: "Gurren Lagann's Kamina was only meant to appear for a few episodes but became so beloved his influence shapes the entire series even after his early exit." },
-  { text: "People live their lives bound by what they accept as correct and true. That's how they define reality.", realAuthor: "Itachi Uchiha", meaning: "Our perceived reality is shaped by the beliefs and truths we choose to accept.", category: "anime", dyk: "Itachi Uchiha consistently ranks as fans' favourite Naruto character in popularity polls — despite being a villain for most of the series." },
-  { text: "You can die anytime, but living takes true courage.", realAuthor: "Kenshin Himura", meaning: "Facing life fully every day requires more bravery than facing death.", category: "anime", dyk: "Rurouni Kenshin is set during the Meiji era of Japan (1868–1912), a real transformational period when samurai culture officially ended by government decree." },
-  { text: "Fall seven times, stand up eight.", realAuthor: "Japanese Proverb", meaning: "Resilience means getting back up after every failure.", category: "proverb", dyk: "The Japanese concept of 'Nana korobi ya oki' is also the title of a famous children's toy called Daruma, a round weighted doll that always returns upright when pushed over." },
-  { text: "Shared joy is a double joy; shared sorrow is half a sorrow.", realAuthor: "Swedish Proverb", meaning: "Sharing experiences strengthens happiness and eases pain.", category: "proverb", dyk: "Sweden consistently ranks in the top 5 happiest countries in the world in the UN World Happiness Report — many researchers link this to strong social trust and community bonds." },
-  { text: "Words should be weighed, not counted.", realAuthor: "Yiddish Proverb", meaning: "Quality of speech matters more than quantity.", category: "proverb", dyk: "Yiddish was spoken by up to 13 million people before World War II. Today around 600,000 speakers remain, making its preservation a major cultural effort." },
-  { text: "The earth is the mother of all.", realAuthor: "Ogoni Proverb (Nigeria)", meaning: "Nature sustains all life, deserving respect and care.", category: "proverb", dyk: "The Ogoni people of Nigeria became internationally known in the 1990s when activist Ken Saro-Wiwa led protests against oil company environmental destruction of their homeland." },
-  { text: "A king's child is a slave elsewhere.", realAuthor: "African Proverb", meaning: "Status is relative; humility is universal.", category: "proverb", dyk: "African proverbs are considered living philosophy — elders use them to settle disputes, teach children and guide communities, passed down entirely through oral tradition." },
-  { text: "Man takes up the sword in order to shield the small wound in his heart.", realAuthor: "Kentaro Miura (Berserk)", meaning: "People fight to protect their inner vulnerabilities.", category: "manga", dyk: "Kentaro Miura spent 32 years creating Berserk, drawing virtually every panel alone. He passed away in 2021 and his close friend Kouji Mori is completing the manga from his notes." },
-  { text: "Even the strongest man must die.", realAuthor: "Kentaro Miura (Berserk)", meaning: "No one is invincible; mortality humbles all.", category: "manga", dyk: "Berserk is famous for its extraordinarily detailed artwork — a single chapter could take Miura several weeks to draw. Some pages contain hundreds of intricate pen-ink creatures." },
-  { text: "Hate is a place where a man who can't stand sadness goes.", realAuthor: "Kentaro Miura (Berserk)", meaning: "Hatred often masks unresolved grief.", category: "manga", dyk: "Berserk directly inspired Dark Souls creator Hidetaka Miyazaki — the Souls series' brutal world, the character Guts, and its themes of perseverance all trace back to Miura's work." },
-  { text: "Dreams. Each man longs to pursue his dream. Each man is tortured by this dream, but the dream gives meaning to his life.", realAuthor: "Kentaro Miura (Berserk)", meaning: "Ambition drives us, even if it causes suffering.", category: "manga", dyk: "Griffith from Berserk is considered one of the greatest villains in manga history. His design, white armour and ambition inspired countless characters including Sephiroth from Final Fantasy VII." },
-  { text: "If you're always worried about crushing the ants beneath you... you won't be able to walk.", realAuthor: "Kentaro Miura (Berserk)", meaning: "Progress requires accepting some unintended harm.", category: "manga", dyk: "Berserk has been in publication since 1989. It is one of the few manga series that has never had a definitive ending — and almost certainly never will have one in its original creator's hand." },
-  { text: "Preoccupied with a single leaf, you won't see the tree. Preoccupied with a single tree, you'll miss the entire forest.", realAuthor: "Takehiko Inoue (Vagabond)", meaning: "Focus on the bigger picture to truly understand.", category: "manga", dyk: "Vagabond is based on the real life of legendary Japanese swordsman Miyamoto Musashi, who fought over 60 duels and never lost. He wrote The Book of Five Rings, still studied in business schools today." },
-  { text: "There is no light for those who do not know darkness.", realAuthor: "Takehiko Inoue (Vagabond)", meaning: "Appreciating good requires experiencing hardship.", category: "manga", dyk: "Takehiko Inoue won the Eisner Award — the comic equivalent of the Oscars — making Vagabond one of very few manga to receive major Western comics recognition." },
-  { text: "Nothing goes perfectly for us. But... being incomplete is what pushes us onward to the next something.", realAuthor: "Takehiko Inoue (Vagabond)", meaning: "Imperfection drives growth and progress.", category: "manga", dyk: "Vagabond has been on hiatus since 2015 with no confirmed return date. Inoue has spoken publicly about struggling with perfectionism as the reason for the pause." },
-  { text: "Invincible... it is merely a word.", realAuthor: "Takehiko Inoue (Vagabond)", meaning: "No one is truly unbeatable; it's an illusion.", category: "manga", dyk: "The real Miyamoto Musashi fought his most famous duel against Sasaki Kojiro at age 29, arriving over two hours late on purpose as a psychological tactic — and won in seconds." },
-  { text: "Once your heart is preoccupied, your sword will not be true. Then you will die.", realAuthor: "Takehiko Inoue (Vagabond)", meaning: "Distraction leads to failure in critical moments.", category: "manga", dyk: "Miyamoto Musashi spent his later years as a painter and calligrapher. His brushwork is considered national art treasures in Japan — he saw swordsmanship and art as expressions of the same spirit." },
-  { text: "You have no enemies. No one has enemies. There is no reason to harm anyone in the world.", realAuthor: "Makoto Yukimura (Vinland Saga)", meaning: "Violence stems from misunderstanding; true peace sees no foes.", category: "manga", dyk: "Vinland Saga is set during the real Viking Age, and Thorfinn is based on actual Norse explorer Thorfinn Karlsefni who led an expedition to North America around 1010 AD." },
-  { text: "Time is on your side. You'll grow up and I'll grow old. Someday you'll likely beat me. It's only natural.", realAuthor: "Makoto Yukimura (Vinland Saga)", meaning: "Age brings inevitable change and reversal of power.", category: "manga", dyk: "Vikings actually reached North America 500 years before Columbus. Archaeological evidence at L'Anse aux Meadows in Newfoundland, Canada confirms a Norse settlement around 1000 AD." },
-  { text: "Why is there no love in the hearts of men?", realAuthor: "Makoto Yukimura (Vinland Saga)", meaning: "Human conflict arises from a lack of compassion.", category: "manga", dyk: "Vinland Saga won the Kodansha Manga Award and is praised by critics for depicting the psychological cost of violence — unusual for an action manga of its scale." },
-  { text: "A true warrior doesn't need a sword.", realAuthor: "Makoto Yukimura (Vinland Saga)", meaning: "Strength comes from within, not weapons.", category: "manga", dyk: "The anime adaptation of Vinland Saga was produced by Wit Studio (Attack on Titan) and MAPPA, two of the most acclaimed anime studios in the industry." },
-  { text: "The journey to freedom is the greatest adventure of all.", realAuthor: "Makoto Yukimura (Vinland Saga)", meaning: "Seeking peace and liberty is life's ultimate quest.", category: "manga", dyk: "Makoto Yukimura started Vinland Saga as a response to the Iraq War — he wanted to examine whether violence ever truly solves human problems." },
-  { text: "If you win, you live. If you lose, you die. If you don't fight, you can't win.", realAuthor: "Eren Yeager (Attack on Titan)", meaning: "Survival demands action and courage.", category: "anime", dyk: "Attack on Titan sold over 100 million copies worldwide. Creator Hajime Isayama wrote the entire ending before starting chapter one, then stuck to it despite fan pressure." },
-  { text: "I am the hope of the universe. I am the answer to all living things that cry out for peace.", realAuthor: "Goku (Dragon Ball)", meaning: "True heroes protect the innocent and seek harmony.", category: "anime", dyk: "Dragon Ball Z's Goku is the most recognised anime character globally according to multiple international surveys, beating even Pikachu in some regions." },
-  { text: "A lesson without pain is meaningless. That's because no one can gain without sacrificing something.", realAuthor: "Edward Elric (Fullmetal Alchemist)", meaning: "Growth requires loss and endurance.", category: "anime", dyk: "Fullmetal Alchemist: Brotherhood is still the highest-rated anime of all time on MyAnimeList with a score consistently above 9.1 from over 2 million ratings." },
-  { text: "The world is cruel, but also very beautiful.", realAuthor: "Mikasa Ackerman (Attack on Titan)", meaning: "Life holds both suffering and wonder.", category: "anime", dyk: "The Survey Corps' wings of freedom symbol in Attack on Titan is based on the real double-headed eagle, a symbol used by the Byzantine and Holy Roman Empires." },
-  { text: "No matter how hard or impossible it is, never lose sight of your goal.", realAuthor: "Monkey D. Luffy (One Piece)", meaning: "Persistence turns dreams into reality.", category: "anime", dyk: "One Piece creator Eiichiro Oda has been drawing weekly since 1997 without a single year off. He reportedly sleeps only 3 hours a night to maintain the schedule." },
-  { text: "If you don't share someone's pain, you can never understand them.", realAuthor: "Nagato (Naruto)", meaning: "Empathy bridges divides between people.", category: "anime", dyk: "The concept of Pain in Naruto was inspired by real-world cycles of war and revenge — Nagato's arc is considered one of anime's most philosophically dense storylines." },
-  { text: "Power comes in response to a need, not a desire.", realAuthor: "Goku (Dragon Ball)", meaning: "True strength arises from necessity, not greed.", category: "anime", dyk: "Dragon Ball Z was so influential in France that a generation of French children grew up calling themselves fans — France remains one of the biggest anime markets outside Japan." },
-  { text: "Human strength lies in the ability to change yourself.", realAuthor: "Saitama (One Punch Man)", meaning: "Personal transformation is the greatest power.", category: "anime", dyk: "One Punch Man began as a free webcomic by a creator known only as ONE, drawn in a deliberately crude style. It went viral in Japan before being redrawn by Yusuke Murata into one of the most beautiful manga ever published." },
-  { text: "Push through the pain. Giving up hurts more.", realAuthor: "Vegeta (Dragon Ball)", meaning: "Enduring hardship leads to greater rewards than quitting.", category: "anime", dyk: "Vegeta is consistently voted the most popular Dragon Ball character in Japan, often beating Goku. His redemption arc is cited as one of the most satisfying character journeys in shonen manga." },
-  { text: "The difference between a novice and a master is that a master has failed more times than a novice had tried.", realAuthor: "Koro-sensei (Assassination Classroom)", meaning: "Failure is the path to mastery.", category: "anime", dyk: "Assassination Classroom ran for 180 chapters and sold over 25 million copies. Its creator Yusei Matsui said the premise — a teacher who must be killed by his students — was meant as a metaphor for overcoming your mentors." },
-  { text: "Do good and throw it in the sea.", realAuthor: "Arab Proverb", meaning: "Kindness should be selfless, without expectation of reward.", category: "proverb", dyk: "This proverb is particularly common across North Africa and the Middle East and reflects the Islamic concept of 'sadaqah' — charity given without expectation of recognition." },
-  { text: "Smooth seas do not make skillful sailors.", realAuthor: "African Proverb", meaning: "Challenges build competence and strength.", category: "proverb", dyk: "A similar sentiment appears in Eleanor Roosevelt's writings and in the journals of Franklin D. Roosevelt, suggesting this wisdom spread across cultures independently." },
-  { text: "Man is the measure of all things.", realAuthor: "Protagoras", meaning: "Human perspective shapes reality and truth.", category: "philosophy", dyk: "Protagoras was one of the first paid teachers in history — he charged enormous fees for his lessons and became very wealthy, scandalising traditional Greeks who believed wisdom should be free." },
-  { text: "I grow old always learning many things.", realAuthor: "Solon", meaning: "Lifelong learning keeps one young in spirit.", category: "philosophy", dyk: "Solon of Athens is one of the Seven Sages of Greece and considered the father of Athenian democracy. He rewrote the city's laws and then voluntarily left Athens for 10 years so no one could pressure him to change them." },
-  { text: "The secret of happiness is not found in seeking more, but in developing the capacity to enjoy less.", realAuthor: "Epicurus", meaning: "Contentment comes from simplicity.", category: "philosophy", dyk: "Epicurus lived in a commune-style garden in Athens with friends and students, practising the simple pleasures he preached. Contrary to the modern word 'epicurean,' he ate bread, water and cheese, not lavish feasts." },
-  { text: "Beware the barrenness of a busy life.", realAuthor: "Socrates", meaning: "Activity without purpose leads to emptiness.", category: "philosophy", dyk: "Socrates was tried and executed by Athens at age 70 for 'corrupting the youth' and 'impiety.' He refused to flee when offered the chance, choosing death over abandoning his principles." },
-  { text: "The roots of education are bitter, but the fruit is sweet.", realAuthor: "Aristotle", meaning: "Learning requires effort, but yields great rewards.", category: "philosophy", dyk: "Aristotle wrote approximately 200 treatises covering logic, biology, physics, ethics, politics, and art. Only about 31 survive — the rest were lost when the Library of Alexandria burned." },
-  { text: "Everything flows, nothing stands still.", realAuthor: "Heraclitus", meaning: "Change is the only constant in life.", category: "philosophy", dyk: "Heraclitus was so difficult to understand that the ancient Greeks nicknamed him 'The Obscure.' He deliberately wrote in riddles because he believed only those who truly sought wisdom deserved to understand it." },
-  { text: "A journey of a thousand miles begins with a single step.", realAuthor: "Confucius", meaning: "Great endeavors start small.", category: "philosophy", dyk: "This is actually misattributed to Confucius — it originally comes from Lao Tzu's Tao Te Ching. The mix-up is one of the most common misattributions in history." },
-  { text: "Every morning we are born again. What we do today is what matters most.", realAuthor: "Buddha", meaning: "Focus on the present for true fulfillment.", category: "spirituality", dyk: "There are over 500 million Buddhists worldwide, making it the fourth largest religion. Unlike most major religions, Buddhism has no single founding text — the Buddha's words were memorised by monks for 400 years before being written down." },
-  { text: "Even if we painstakingly piece together something lost, it doesn't mean things will ever go back to how they were.", realAuthor: "Kentaro Miura (Berserk)", meaning: "Some losses change us irrevocably.", category: "manga", dyk: "The Japanese art of Kintsugi — repairing broken pottery with gold — embodies this idea. The breakage is considered part of the object's history, not something to hide." },
-  { text: "Ambition comes with a price attached.", realAuthor: "Kentaro Miura (Berserk)", meaning: "Pursuing dreams often requires sacrifice.", category: "manga", dyk: "Berserk's villain Griffith is loosely inspired by real historical figures who sacrificed everything for power, including Cesare Borgia, the ruthless Italian nobleman who inspired Machiavelli's The Prince." },
-  { text: "Do you see how infinite you are?", realAuthor: "Takehiko Inoue (Vagabond)", meaning: "Human potential is boundless.", category: "manga", dyk: "Takehiko Inoue is also the creator of Slam Dunk, the basketball manga credited with triggering Japan's real-world basketball boom in the 1990s. The anime recently received a feature film sequel 30 years later." },
-  { text: "Why do we have to fear death? Do we live because we don't want to die?", realAuthor: "Makoto Yukimura (Vinland Saga)", meaning: "Questioning mortality reveals life's purpose.", category: "manga", dyk: "The Stoic philosophers, particularly Seneca, asked almost this exact question 2,000 years ago: 'It is not death that a man should fear, but he should fear never beginning to live.'" },
-  { text: "The leaping of one fish would never disturb the flow of the river.", realAuthor: "Makoto Yukimura (Vinland Saga)", meaning: "Individual actions rarely alter the greater course.", category: "manga", dyk: "This idea — that individuals are small against history's current — appears in Tolstoy's War and Peace, which argues that great events are driven by collective forces, not individual great men." },
-  { text: "I think, therefore I am.", realAuthor: "René Descartes", meaning: "The very act of thinking proves one's existence.", category: "philosophy", dyk: "Descartes came up with this insight while sitting alone in a room heated by a stove, trying to doubt everything he possibly could. It remains the most famous sentence in Western philosophy." },
-  { text: "God is dead. God remains dead. And we have killed him.", realAuthor: "Friedrich Nietzsche", meaning: "Modern society has moved beyond traditional religious frameworks.", category: "philosophy", dyk: "Nietzsche wrote this in 1882. He suffered a mental breakdown in 1889 from which he never recovered, spending his last 11 years in a catatonic state. The cause remains debated — possibly syphilis, or a hereditary condition." },
-  { text: "One cannot step twice in the same river.", realAuthor: "Heraclitus", meaning: "Everything is in constant flux and change.", category: "philosophy", dyk: "This quote inspired the philosopher Cratylus to take it further, arguing you can't step in the same river even once — because you and the river are both changing even as your foot touches the water." },
-  { text: "The unexamined life is not worth living.", realAuthor: "Socrates", meaning: "Self-reflection is essential to a meaningful existence.", category: "philosophy", dyk: "Socrates said this at his trial just before being sentenced to death. He was given the option to propose his own punishment — and suggested the city of Athens reward him with free meals for life, which did not help his case." },
-  { text: "He who has a why to live can bear almost any how.", realAuthor: "Friedrich Nietzsche", meaning: "Purpose gives us strength to endure hardship.", category: "philosophy", dyk: "Holocaust survivor Viktor Frankl quoted this line in his landmark book Man's Search for Meaning, saying it described exactly what kept prisoners alive in Nazi concentration camps." },
-  { text: "What does not kill me makes me stronger.", realAuthor: "Friedrich Nietzsche", meaning: "Adversity builds resilience and character.", category: "philosophy", dyk: "Nietzsche wrote this in Twilight of the Idols in 1888 — just one year before his mental collapse. The irony is not lost on scholars who study his life." },
-  { text: "To be is to do.", realAuthor: "Immanuel Kant", meaning: "Existence is defined by action and moral choice.", category: "philosophy", dyk: "Kant was so punctual that the people of Königsberg reportedly set their clocks by his daily afternoon walk. He lived in the same city his entire life and never traveled more than 100km from his birthplace." },
-  { text: "Happiness is not an ideal of reason, but of imagination.", realAuthor: "Immanuel Kant", meaning: "True happiness comes from creative fulfillment, not logic.", category: "philosophy", dyk: "Kant's Critique of Pure Reason, published in 1781, is considered so difficult that even philosophy professors find it hard to read. He took 10 years to write it after being inspired by reading David Hume." },
-  { text: "The mind is furnished with ideas by experience alone.", realAuthor: "John Locke", meaning: "All knowledge comes from sensory experience.", category: "philosophy", dyk: "John Locke's political ideas directly inspired the US Declaration of Independence. Thomas Jefferson borrowed Locke's phrase 'life, liberty and property' and changed 'property' to 'pursuit of happiness.'" },
-  { text: "I fear not the man who has practiced 10,000 kicks once, but I fear the man who has practiced one kick 10,000 times.", realAuthor: "Bruce Lee", meaning: "Mastery comes from focused repetition, not variety.", category: "martial arts", dyk: "Bruce Lee could do push-ups using only two fingers and one thumb. He could also snatch a dime off a person's open palm and replace it with a penny before they could close their hand." },
-  { text: "Be water, my friend.", realAuthor: "Bruce Lee", meaning: "Adaptability and flexibility are key to overcoming obstacles.", category: "martial arts", dyk: "Bruce Lee said this in a 1971 TV interview. It became one of the most quoted phrases in martial arts history and is now used by businesses, psychologists and coaches worldwide." },
-  { text: "Empty your mind, be formless, shapeless, like water.", realAuthor: "Bruce Lee", meaning: "Freedom comes from releasing rigid patterns of thought.", category: "martial arts", dyk: "Bruce Lee created his own martial art, Jeet Kune Do, at age 26. It was revolutionary because it drew from multiple styles at a time when mixing martial arts was considered a betrayal of tradition." },
-  { text: "Knowing is not enough, we must apply. Willing is not enough, we must do.", realAuthor: "Bruce Lee", meaning: "Action is more important than knowledge or intention alone.", category: "martial arts", dyk: "This quote is often misattributed to Bruce Lee — it is actually from Goethe's Wilhelm Meister's Apprenticeship, written in 1795. Lee included it in his notes and it became associated with him." },
-  { text: "The key to immortality is first living a life worth remembering.", realAuthor: "Bruce Lee", meaning: "Legacy is built through meaningful actions, not mere existence.", category: "martial arts", dyk: "Bruce Lee died at 32 in 1973, just six days before the premiere of Enter the Dragon, the film that made him a global superstar. He remains one of the most influential people of the 20th century." },
-  { text: "All that we are is the result of what we have thought.", realAuthor: "Buddha", meaning: "Our consciousness shapes our reality and identity.", category: "spirituality", dyk: "Modern neuroscience supports this — studies show that repeated thought patterns physically reshape neural pathways, a phenomenon called neuroplasticity, discovered 2,500 years after the Buddha described it." },
-  { text: "Three things cannot be long hidden: the sun, the moon, and the truth.", realAuthor: "Buddha", meaning: "Truth, like natural phenomena, eventually reveals itself.", category: "spirituality", dyk: "The Buddha spent 45 years teaching after his enlightenment, walking an estimated 250,000 kilometers across India and Nepal — roughly six times around the Earth." },
-  { text: "Peace comes from within. Do not seek it without.", realAuthor: "Buddha", meaning: "True serenity is found internally, not through external means.", category: "spirituality", dyk: "Mindfulness meditation, now practised by an estimated 500 million people globally and recommended by doctors and psychologists, is directly derived from Buddhist meditation techniques developed 2,500 years ago." },
-  { text: "The mind is everything. What you think you become.", realAuthor: "Buddha", meaning: "Our thoughts ultimately shape our reality and identity.", category: "spirituality", dyk: "This quote is often cited in psychology — the placebo effect demonstrates it scientifically. Patients who believe they are receiving treatment often show measurable physical improvement from sugar pills alone." },
-  { text: "Health is the greatest gift, contentment the greatest wealth, faithfulness the best relationship.", realAuthor: "Buddha", meaning: "True riches are found in well-being, satisfaction, and loyalty.", category: "spirituality", dyk: "Despite founding one of the world's great religions, the Buddha asked his followers not to worship him. He said 'be a lamp unto yourself' — meaning seek inner truth, not external authority." },
-  { text: "When I let go of what I am, I become what I might be.", realAuthor: "Lao Tzu", meaning: "Releasing ego and identity allows for true transformation.", category: "spirituality", dyk: "The Tao Te Ching, attributed to Lao Tzu, is the most translated book in the world after the Bible. It has been rendered into English alone in over 250 different versions." },
-  { text: "Nature does not hurry, yet everything is accomplished.", realAuthor: "Lao Tzu", meaning: "Patience and natural flow achieve more than forced effort.", category: "spirituality", dyk: "This principle — called Wu Wei or 'non-action' in Taoism — is finding modern application in flow theory, positive psychology, and even software engineering's concept of elegant minimal solutions." },
-  { text: "He who knows, does not speak. He who speaks, does not know.", realAuthor: "Lao Tzu", meaning: "True wisdom is often silent, while empty talk reveals ignorance.", category: "spirituality", dyk: "This paradox is particularly interesting because it comes from a book — suggesting even Lao Tzu saw the contradiction in writing about the limits of words." },
-  { text: "Being deeply loved by someone gives you strength, while loving someone deeply gives you courage.", realAuthor: "Lao Tzu", meaning: "Love operates in two directions: receiving empowers, giving emboldens.", category: "spirituality", dyk: "Research in positive psychology by Dr. Barbara Fredrickson confirms this — studies show people with strong loving relationships demonstrate measurably greater resilience and risk tolerance." },
-  { text: "The superior man is modest in his speech, but exceeds in his actions.", realAuthor: "Confucius", meaning: "True excellence shows in deeds rather than words.", category: "philosophy", dyk: "Confucius held several government positions during his life but was largely ignored by rulers of his era. His ideas became the official state philosophy of China only 300 years after his death." },
-  { text: "To see what is right and not to do it is want of courage.", realAuthor: "Confucius", meaning: "Moral failure lies in recognizing goodness but failing to act.", category: "philosophy", dyk: "This concept — knowing good but choosing not to act — is called 'moral disengagement' by modern psychologists. Albert Bandura's research shows it is the primary mechanism behind how ordinary people commit atrocities." },
-  { text: "The man who moves a mountain begins by carrying away small stones.", realAuthor: "Confucius", meaning: "Great achievements are built through consistent small efforts.", category: "philosophy", dyk: "This concept aligns perfectly with James Clear's Atomic Habits principle that 1% better every day compounds to 37 times better over a year — ancient wisdom meeting modern science." },
-  { text: "Our greatest glory is not in never falling, but in rising every time we fall.", realAuthor: "Confucius", meaning: "True honor lies in resilience and recovery from failure.", category: "philosophy", dyk: "Confucius himself failed repeatedly — he spent 13 years wandering China trying to convince rulers to adopt his ideas and was rejected every time. He returned home at 68 and spent his final years teaching." },
-  { text: "When do you think people die? When they are shot through the heart? No. It's when they are forgotten.", realAuthor: "Dr. Hiriluk (One Piece)", meaning: "True death is being erased from memory, not physical demise.", category: "anime", dyk: "This idea echoes real cultural beliefs — the Aztec concept of 'Xiu Miquiztli' (true death) holds that a person lives as long as someone speaks their name. Today 'The Day of the Dead' celebrates keeping ancestors alive in memory." },
-  { text: "I don't want to conquer anything. I just think the guy with the most freedom in this whole ocean is the Pirate King!", realAuthor: "Monkey D. Luffy", meaning: "True freedom, not domination, is the highest aspiration.", category: "anime", dyk: "One Piece has been the top-selling manga in Japan for 15 consecutive years. Eiichiro Oda has said he has the ending already drawn and stored in a sealed box that will only be opened when he is near death." },
-  { text: "Power isn't determined by your size, but the size of your heart and dreams.", realAuthor: "Monkey D. Luffy", meaning: "True strength comes from inner conviction and ambition.", category: "anime", dyk: "Luffy's Devil Fruit ability — stretching like rubber — was inspired by the Japanese toy 'soft vinyl' figures that stretch and return to shape, which Oda played with as a child." },
-  { text: "Those who break the rules are scum, but those who abandon their friends are worse than scum.", realAuthor: "Kakashi Hatake (Naruto)", meaning: "Loyalty to comrades surpasses even the importance of rules.", category: "anime", dyk: "Kakashi Hatake consistently tops Naruto character popularity polls in Japan. His face, hidden beneath his mask, became one of anime's great mysteries — finally revealed in a comedic episode after years of fan requests." },
-  { text: "Sometimes you must hurt in order to know, fall in order to grow, lose in order to gain.", realAuthor: "Pain (Naruto)", meaning: "Suffering is often the most effective teacher in life.", category: "anime", dyk: "The Pain Arc in Naruto Shippuden is cited by critics and fans as one of the greatest arcs in shonen anime history, praised for turning a villain into one of the most philosophically complex characters in the medium." },
-  { text: "The moment people come to know love, they run the risk of carrying hate.", realAuthor: "Obito Uchiha (Naruto)", meaning: "Deep attachment creates vulnerability to profound resentment.", category: "anime", dyk: "Psychologist John Bowlby's attachment theory in modern psychology states almost exactly this — that the capacity for love inherently creates vulnerability to grief, loss and anger. Obito arrived there through pain alone." },
-  { text: "It's not the face that makes someone a monster; it's the choices they make with their lives.", realAuthor: "Naruto Uzumaki", meaning: "Character is defined by actions, not appearance or nature.", category: "anime", dyk: "This theme runs through virtually all great shonen manga — and mirrors real psychological research showing that moral identity is built through repeated small choices, not innate personality." },
-  { text: "A place where someone still thinks about you is a place you can call home.", realAuthor: "Jiraiya (Naruto)", meaning: "Home is defined by emotional connections, not physical location.", category: "anime", dyk: "Jiraiya is one of the most beloved characters in all of anime. His death scene caused such emotional uproar among fans that it trended globally on social media — years before social media routinely tracked anime events." },
-  { text: "Wake up to reality! Nothing ever goes as planned in this world.", realAuthor: "Madara Uchiha (Naruto)", meaning: "Idealistic expectations inevitably clash with harsh actuality.", category: "anime", dyk: "Madara Uchiha is based partly on real historical warlords of feudal Japan. His design and personality also drew inspiration from Sun Tzu's Art of War, particularly the sections on deception and overwhelming force." },
-  { text: "If you don't like your destiny, don't accept it. Instead, have the courage to change it the way you want it to be.", realAuthor: "Naruto Uzumaki", meaning: "True power lies in rejecting fate and creating one's own path.", category: "anime", dyk: "This message resonated so strongly in Japan that Naruto is officially credited by the Japanese government's cultural agency for helping introduce Japanese culture to a new global generation." },
-  { text: "I'm not a hero of justice or anything. I fight for myself, for the people I care about.", realAuthor: "Ichigo Kurosaki (Bleach)", meaning: "Personal connections, not abstract ideals, motivate true action.", category: "anime", dyk: "Bleach's creator Tite Kubo nearly ended the manga after the Soul Society arc — he considered it the natural conclusion. Fans' overwhelming response convinced him to continue for another 15 years." },
-  { text: "We are all like fireworks: we climb, we shine and always go our separate ways. But let's not disappear — continue to shine forever.", realAuthor: "Hitsugaya Toshiro (Bleach)", meaning: "Though connections fade, lasting impact and memory remain.", category: "anime", dyk: "Hitsugaya Toshiro consistently won Bleach popularity polls despite being a minor character — a phenomenon that baffled creator Tite Kubo, who had planned to give him much less screen time." },
-  { text: "To know sorrow is not terrifying. What is terrifying is to know you can't go back to happiness you could have.", realAuthor: "Matsumoto Rangiku (Bleach)", meaning: "Irreversible loss of past joy is the true essence of fear.", category: "anime", dyk: "Psychologists call the emotion described here 'anticipatory grief' combined with 'counterfactual thinking' — imagining the roads not taken. Research shows it is one of the most psychologically painful human experiences." },
-  { text: "A real fight isn't about winning or losing. You fight when you have to fight.", realAuthor: "Kenpachi Zaraki (Bleach)", meaning: "True combat arises from necessity, not competition or victory.", category: "anime", dyk: "The concept of fighting only when necessary is central to Bushido, the samurai code of ethics — a warrior who seeks fights for sport was considered dishonourable, while one who fights to protect was revered." },
-  { text: "Don't live your life making up excuses. Live your life so you don't need to make excuses.", realAuthor: "Koro-sensei (Assassination Classroom)", meaning: "A life well-lived inherently justifies itself without explanation.", category: "anime", dyk: "Assassination Classroom's central metaphor — a teacher who must be killed by his students — was deliberately designed to represent every student's need to eventually surpass their teacher to truly grow." },
-  { text: "It's not about being better than someone else, but being better than you used to be.", realAuthor: "Koro-sensei (Assassination Classroom)", meaning: "True growth is measured against one's own past self.", category: "anime", dyk: "This philosophy is called 'personal mastery' in modern psychology and is backed by decades of motivation research — people who compete against themselves sustain motivation longer than those who compete against others." },
-  { text: "The world isn't perfect. But it's there for us, doing the best it can. That's what makes it so damn beautiful.", realAuthor: "Roy Mustang (Fullmetal Alchemist)", meaning: "Beauty lies in imperfection and persistent effort, not flawlessness.", category: "anime", dyk: "The Japanese concept of wabi-sabi — finding beauty in imperfection and impermanence — is considered one of Japan's most unique philosophical contributions to the world. Roy Mustang understood it perfectly." },
-  { text: "Humankind cannot gain anything without first giving something in return.", realAuthor: "Alphonse Elric (Fullmetal Alchemist)", meaning: "The fundamental law of equivalent exchange governs all existence.", category: "anime", dyk: "Equivalent exchange in FMA mirrors real thermodynamic laws — conservation of energy states that energy cannot be created or destroyed, only converted. The alchemical law is essentially fictional physics." },
-  { text: "Stand up and walk. Keep moving forward. You've got two good legs. So get up and use them.", realAuthor: "Edward Elric (Fullmetal Alchemist)", meaning: "Resilience means continuing to advance despite setbacks.", category: "anime", dyk: "Edward Elric at 15 is one of the youngest State Alchemists ever in FMA's lore — and one of the youngest protagonists in shonen to carry a series that deals with war, genocide and political corruption." },
-  { text: "Strength is the only thing that matters in this world. Everything else is just an illusion.", realAuthor: "Vegeta (Dragon Ball)", meaning: "Power is the ultimate determinant of reality and worth.", category: "anime", dyk: "Vegeta's character arc — from ruthless villain to reluctant hero and father — is studied in narrative design courses as one of the most successful antagonist-to-protagonist transformations in any storytelling medium." },
-  { text: "The power of hope is small, but it's the only thing that can defeat despair.", realAuthor: "Makoto Naegi (Danganronpa)", meaning: "Though fragile, hope alone can overcome utter hopelessness.", category: "anime", dyk: "Danganronpa was originally a visual novel game before becoming an anime. Its creator Kazutaka Kodaka designed it to explore how hope survives in systematically hopeless situations — inspired by real-world psychological resilience studies." },
-  { text: "Even if we lose our memories, we won't lose our feelings. That's what I believe.", realAuthor: "Kaede Akamatsu (Danganronpa)", meaning: "Emotional truth persists beyond cognitive recollection.", category: "anime", dyk: "This is scientifically supported — studies of Alzheimer's patients show that emotional memories encoded by the amygdala often survive long after episodic memories are lost, a phenomenon called 'emotional memory preservation.'" },
-  { text: "The world is not beautiful; therefore, it is.", realAuthor: "Kino (Kino's Journey)", meaning: "True beauty lies in imperfection and contradiction itself.", category: "anime", dyk: "Kino's Journey is adapted from a series of light novels by Keiichi Sigsawa, written when he was a university student. The series is a philosophical travelogue deliberately inspired by Candide, Voltaire's satirical novel." },
-  { text: "No matter how deep the night, it always turns to day, eventually.", realAuthor: "Emma (The Promised Neverland)", meaning: "All periods of darkness eventually give way to light.", category: "anime", dyk: "The Promised Neverland was created by writer Kaiu Shirai and artist Posuka Demizu — neither had published a major manga before. It debuted in 2016 and became one of the fastest-selling new series in Shonen Jump history." },
-];
-
-// ── Author groups for smarter fake options ────────────────────────────────────
-const ALL_SPEAKERS = [
-  "Socrates","Aristotle","Plato","Buddha","Lao Tzu","Confucius",
-  "African Proverb","Japanese Proverb","Arab Proverb","Swedish Proverb",
-  "Yiddish Proverb","Ogoni Proverb (Nigeria)","Naruto Uzumaki","Monkey D. Luffy",
-  "Koro-sensei (Assassination Classroom)","Kamina","Itachi Uchiha","Goku (Dragon Ball)","Kenshin Himura",
-  "Vegeta (Dragon Ball)","Saitama (One Punch Man)","Edward Elric (Fullmetal Alchemist)",
-  "Kentaro Miura (Berserk)","Takehiko Inoue (Vagabond)","Makoto Yukimura (Vinland Saga)",
-  "Eren Yeager (Attack on Titan)","Mikasa Ackerman (Attack on Titan)","Nagato (Naruto)",
-  "Roy Mustang (Fullmetal Alchemist)","Heraclitus","Epicurus","Solon","René Descartes",
-  "Friedrich Nietzsche","Immanuel Kant","John Locke","Bruce Lee",
-  "Dr. Hiriluk (One Piece)","Kakashi Hatake (Naruto)","Pain (Naruto)",
-  "Obito Uchiha (Naruto)","Rock Lee (Naruto)","Jiraiya (Naruto)",
-  "Madara Uchiha (Naruto)","Ichigo Kurosaki (Bleach)","Hitsugaya Toshiro (Bleach)",
-  "Matsumoto Rangiku (Bleach)","Uryu Ishida (Bleach)","Kenpachi Zaraki (Bleach)",
-  "Alphonse Elric (Fullmetal Alchemist)","Makoto Naegi (Danganronpa)",
-  "Kaede Akamatsu (Danganronpa)","Kino (Kino's Journey)","Emma (The Promised Neverland)",
-  "Monkey D. Luffy (One Piece)","Gol D. Roger (One Piece)","Protagoras",
-];
-
-const AUTHOR_GROUPS = {
-  greek:       ["Socrates","Aristotle","Plato","Heraclitus","Epicurus","Solon","Protagoras"],
-  modern_phil: ["Friedrich Nietzsche","Immanuel Kant","René Descartes","John Locke"],
-  eastern:     ["Buddha","Lao Tzu","Confucius"],
-  martial:     ["Bruce Lee","Kenshin Himura"],
-  proverbs:    ["African Proverb","Japanese Proverb","Arab Proverb","Swedish Proverb","Yiddish Proverb","Ogoni Proverb (Nigeria)"],
-  shonen:      ["Naruto Uzumaki","Monkey D. Luffy","Goku (Dragon Ball)","Kamina","Rock Lee (Naruto)","Monkey D. Luffy (One Piece)"],
-  deep_anime:  ["Itachi Uchiha","Pain (Naruto)","Madara Uchiha (Naruto)","Obito Uchiha (Naruto)","Nagato (Naruto)"],
-  fma:         ["Edward Elric (Fullmetal Alchemist)","Alphonse Elric (Fullmetal Alchemist)","Roy Mustang (Fullmetal Alchemist)"],
-  bleach:      ["Ichigo Kurosaki (Bleach)","Hitsugaya Toshiro (Bleach)","Matsumoto Rangiku (Bleach)","Kenpachi Zaraki (Bleach)","Uryu Ishida (Bleach)"],
-  berserk:     ["Kentaro Miura (Berserk)","Takehiko Inoue (Vagabond)","Makoto Yukimura (Vinland Saga)"],
-  one_piece:   ["Monkey D. Luffy","Monkey D. Luffy (One Piece)","Dr. Hiriluk (One Piece)","Gol D. Roger (One Piece)"],
-  naruto:      ["Naruto Uzumaki","Itachi Uchiha","Kakashi Hatake (Naruto)","Pain (Naruto)","Obito Uchiha (Naruto)","Jiraiya (Naruto)","Madara Uchiha (Naruto)","Nagato (Naruto)"],
-};
-
 const CATEGORY_ACCENT = {
   philosophy:     "var(--col-philosophy)",
   spirituality:   "var(--col-spirituality)",
@@ -179,225 +33,28 @@ const DIFF_TIMES = { easy: 15, normal: 10, hard: 6 };
 // ══════════════════════════════════════════════════════════════════════════════
 // SPEAKER BIOS  (covers every unique realAuthor in QUOTES_DATA)
 // ══════════════════════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════════════════════════════
+// DATA — loaded from quotes.json at startup
+// ══════════════════════════════════════════════════════════════════════════════
+let QUOTES_DATA = [];
+let ALL_SPEAKERS = [];
+let AUTHOR_GROUPS = {};
+let SPEAKER_BIOS = {};
+
 const CAT_ICONS = {
   philosophy: "⚖️", spirituality: "☯️", anime: "⚔️",
   manga: "📖", proverb: "🌿", "martial arts": "🥋",
 };
 
-const SPEAKER_BIOS = {
-  "Socrates": {
-    icon:"⚖️", meta:"Greek Philosopher · 470–399 BC",
-    bio:"Socrates never wrote a single word — everything we know comes through his students. He spent his life questioning Athenians in the street, believing he had no wisdom of his own. The Socratic method of relentless questioning he invented is still used in law schools today. Sentenced to death at 70 for 'corrupting the youth,' he refused to flee and drank the hemlock calmly.",
-  },
-  "Aristotle": {
-    icon:"⚖️", meta:"Greek Philosopher · 384–322 BC",
-    bio:"Aristotle wrote on logic, biology, physics, ethics, politics, and theatre — arguably the greatest single mind in history. Only 31 of his estimated 200 works survive; the rest were lost. He tutored the 13-year-old Alexander the Great for three years. He founded the Lyceum school where he taught while walking, earning his followers the nickname 'Peripatetics.'",
-  },
-  "Buddha": {
-    icon:"☯️", meta:"Spiritual Teacher · c.563–483 BC",
-    bio:"Siddhartha Gautama was a prince who abandoned wealth and comfort to seek the end of suffering. After years of extreme asceticism followed by meditation, he achieved enlightenment under the Bodhi tree at age 35. He spent the next 45 years walking across India teaching, covering an estimated 250,000 kilometers. Over 500 million people follow his teachings today.",
-  },
-  "Lao Tzu": {
-    icon:"☯️", meta:"Chinese Philosopher · c.6th century BC",
-    bio:"Lao Tzu ('Old Master') may be more legend than history — scholars still debate whether he was a real person. He is credited with writing the Tao Te Ching, the most translated book in the world after the Bible, rendered into English alone in over 250 versions. His philosophy of Wu Wei — effortless action — continues to influence thinkers, leaders, and engineers worldwide.",
-  },
-  "Confucius": {
-    icon:"⚖️", meta:"Chinese Philosopher · 551–479 BC",
-    bio:"Confucius spent 13 years wandering China trying to convince rulers to adopt his ethical ideas and was rejected at every turn. He returned home at 68 and devoted his final years to teaching. Three hundred years after his death, his ideas became the official state philosophy of China and remained so for over 2,000 years, shaping one of the world's oldest civilizations.",
-  },
-  "Bruce Lee": {
-    icon:"🥋", meta:"Martial Artist & Philosopher · 1940–1973",
-    bio:"Bruce Lee created his own martial art, Jeet Kune Do, at just 26. He could do push-ups on two fingers and snatch a coin from someone's palm before they could close their hand. His philosophical notebooks fill multiple published volumes. He died at 32 — six days before Enter the Dragon premiered, the film that made him a global legend. He remains among the 20th century's most influential people.",
-  },
-  "Friedrich Nietzsche": {
-    icon:"⚖️", meta:"German Philosopher · 1844–1900",
-    bio:"Nietzsche challenged the foundations of Western morality and declared 'God is dead' — meaning modern society had moved beyond traditional frameworks. He wrote some of philosophy's most explosive ideas in just a decade before suffering a complete mental collapse in 1889, spending his last 11 years in a catatonic state. His ideas were later grotesquely misappropriated by the Nazis, something he would have despised.",
-  },
-  "René Descartes": {
-    icon:"⚖️", meta:"French Philosopher · 1596–1650",
-    bio:"Descartes arrived at 'I think therefore I am' while sitting alone in a heated room trying to doubt absolutely everything. He is considered the father of modern Western philosophy. He also invented analytical geometry — the coordinate system every graph uses is named the Cartesian plane after him. He died of pneumonia, likely contracted tutoring Queen Christina of Sweden at 5am in freezing temperatures.",
-  },
-  "Immanuel Kant": {
-    icon:"⚖️", meta:"German Philosopher · 1724–1804",
-    bio:"Kant was so punctual that the people of Königsberg set their clocks by his afternoon walk. He lived his entire life within 100km of his birthplace and never traveled. Yet his Critique of Pure Reason, written at 57 after a decade of philosophical silence, is considered one of the most important books ever written — even if almost no one can read it easily.",
-  },
-  "John Locke": {
-    icon:"⚖️", meta:"English Philosopher · 1632–1704",
-    bio:"John Locke's ideas about natural rights and government consent directly inspired the American Revolution. Thomas Jefferson borrowed Locke's phrase 'life, liberty and property' for the Declaration of Independence, famously changing 'property' to 'pursuit of happiness.' Locke also laid the groundwork for modern science, arguing that all knowledge comes from experience rather than innate ideas.",
-  },
-  "Heraclitus": {
-    icon:"⚖️", meta:"Greek Philosopher · c.535–475 BC",
-    bio:"Heraclitus was so deliberately difficult to understand that the ancient Greeks nicknamed him 'The Obscure.' He believed change is the only constant and that opposites are secretly one. His writings survive only in fragments quoted by other authors. His ideas about flux directly influenced Hegel, Marx, and modern physics — Einstein found his river metaphor particularly compelling.",
-  },
-  "Epicurus": {
-    icon:"⚖️", meta:"Greek Philosopher · 341–270 BC",
-    bio:"Despite the modern word 'epicurean' suggesting lavish pleasure, Epicurus lived on bread, water, and cheese in a commune garden in Athens. He believed happiness came from simple pleasures and friendship — not luxury. His school was revolutionary: he admitted women and slaves as equals at a time when this was unheard of in Athens.",
-  },
-  "Protagoras": {
-    icon:"⚖️", meta:"Greek Philosopher · c.490–420 BC",
-    bio:"Protagoras was one of the first Sophists — professional teachers of wisdom — and one of the first paid educators in history. He charged enormous fees and became wealthy, scandalising Greeks who believed wisdom should be free. His claim that 'man is the measure of all things' is one of philosophy's earliest statements of relativism and still generates debate today.",
-  },
-  "Solon": {
-    icon:"⚖️", meta:"Athenian Statesman · c.638–558 BC",
-    bio:"Solon is considered the father of Athenian democracy and one of the Seven Sages of ancient Greece. He completely rewrote Athens' laws, canceling debt slavery and laying the groundwork for democratic governance. After his reforms, he voluntarily left Athens for 10 years so no one could pressure him to change anything. He spent those years traveling Egypt, Cyprus, and meeting Croesus, king of Lydia.",
-  },
-  "Naruto Uzumaki": {
-    icon:"⚔️", meta:"Anime · Naruto / Shippuden",
-    bio:"Naruto began as an orphaned outcast — a boy shunned by his entire village for containing a demon fox. His journey from being the most hated person in the village to its greatest protector, through sheer stubbornness and belief in others, is one of manga's most beloved stories. Creator Masashi Kishimoto said Naruto's refusal to give up was directly inspired by his own personality.",
-  },
-  "Monkey D. Luffy": {
-    icon:"⚔️", meta:"Anime · One Piece",
-    bio:"Luffy's dream of becoming King of the Pirates is not about power — it's about freedom. Despite seeming simple-minded, he wins allies through an almost supernatural ability to make people believe in themselves. One Piece has sold over 500 million copies, making it the best-selling manga series in history by a single author. Creator Oda has the ending drawn and sealed in a box.",
-  },
-  "Monkey D. Luffy (One Piece)": {
-    icon:"⚔️", meta:"Anime · One Piece",
-    bio:"Luffy's dream of becoming King of the Pirates is not about power — it's about freedom. Despite seeming simple-minded, he wins allies through an almost supernatural ability to make people believe in themselves. One Piece has sold over 500 million copies, making it the best-selling manga series in history by a single author. Creator Oda has the ending drawn and sealed in a box.",
-  },
-  "Kamina": {
-    icon:"⚔️", meta:"Anime · Gurren Lagann",
-    bio:"Kamina is Gurren Lagann's blazing heart — a young man who never doubted himself even when he probably should have, and whose belief in others became the fuel for something far greater than himself. He was only meant to appear for a few episodes but became so beloved his spirit defines the entire series even after his exit. His catchphrase 'Who the hell do you think I am?' became iconic.",
-  },
-  "Itachi Uchiha": {
-    icon:"⚔️", meta:"Anime · Naruto Shippuden",
-    bio:"Itachi carried the weight of an impossible sacrifice his entire life — slaughtering his own clan to prevent a civil war, then allowing his younger brother to believe he was a monster so the hatred would fuel the power needed to eventually defeat him. His true nature, revealed only at death, is considered one of anime's greatest narrative revelations. He tops Naruto popularity polls to this day.",
-  },
-  "Kenshin Himura": {
-    icon:"⚔️", meta:"Anime · Rurouni Kenshin",
-    bio:"Kenshin was the most feared assassin in Japan's Meiji Revolution — responsible for countless deaths — who spent years wandering as a peaceful drifter, wielding a sword that cannot kill. Set during a real era when Japan transformed from feudal to modern society, his struggle between his violent past and peaceful present mirrors Japan's own national trauma. The manga sold over 72 million copies.",
-  },
-  "Eren Yeager (Attack on Titan)": {
-    icon:"⚔️", meta:"Anime · Attack on Titan",
-    bio:"Eren begins as a furious boy who simply wants to destroy every titan. Over 139 chapters he transforms into one of manga's most controversial protagonists — his final choices challenge readers to question whether the goals they had been cheering for were ever justified. Creator Isayama wrote the entire ending before chapter one and never changed it despite enormous fan pressure against it.",
-  },
-  "Mikasa Ackerman (Attack on Titan)": {
-    icon:"⚔️", meta:"Anime · Attack on Titan",
-    bio:"Mikasa is the Survey Corps' greatest soldier — calm, ferociously capable, and driven by a devotion to protect the people she loves. Her Ackerman bloodline gives her innate combat ability that goes beyond normal human limits. Despite her immense strength, her story is ultimately one of love, loss, and learning to exist for herself rather than for the person she has always followed.",
-  },
-  "Goku (Dragon Ball)": {
-    icon:"⚔️", meta:"Anime · Dragon Ball Z",
-    bio:"Originally sent to Earth as an infant to destroy it, a head injury erased Goku's mission and left him the cheerful, food-obsessed fighter who became Earth's greatest defender. His design — spiky hair, orange gi, boundless optimism — has influenced virtually every shonen protagonist since. He is arguably the most recognised anime character globally, ranking above Pikachu in multiple international surveys.",
-  },
-  "Vegeta (Dragon Ball)": {
-    icon:"⚔️", meta:"Anime · Dragon Ball Z",
-    bio:"Vegeta arrives as the most dangerous villain in Dragon Ball — a prince consumed by pride who has destroyed entire civilizations. His slow, painful transformation into a reluctant hero, devoted father, and Goku's rival is considered one of the greatest character redemption arcs in any medium. In Japanese polls he consistently beats Goku as the more beloved character.",
-  },
-  "Saitama (One Punch Man)": {
-    icon:"⚔️", meta:"Anime · One Punch Man",
-    bio:"Saitama is the world's strongest hero — who can defeat any enemy with a single punch — and he's bored out of his mind. The series uses his invincibility as a lens to examine depression, purpose, and what happens when you achieve your goals and find nothing there. One Punch Man began as a crude free webcomic before being redrawn by Yusuke Murata into one of the most gorgeous manga ever published.",
-  },
-  "Edward Elric (Fullmetal Alchemist)": {
-    icon:"⚔️", meta:"Anime · Fullmetal Alchemist: Brotherhood",
-    bio:"Ed is just 15 when FMA begins — one of the youngest protagonists to carry a series dealing with war, genocide, and political corruption. His rule that equivalent exchange governs everything mirrors the real physics law of conservation of energy. FMA: Brotherhood is still the highest-rated anime of all time on MyAnimeList, rated above 9.1 from over 2 million users.",
-  },
-  "Alphonse Elric (Fullmetal Alchemist)": {
-    icon:"⚔️", meta:"Anime · Fullmetal Alchemist: Brotherhood",
-    bio:"Al lost his entire body in a failed alchemical ritual at age 10, existing only as a soul bound to a suit of armour. Despite this, he remains the most gentle and compassionate character in FMA — a quiet counterpoint to his brother's brash rage. His patience and kindness in circumstances that would break anyone else is one of the series' most quietly profound elements.",
-  },
-  "Roy Mustang (Fullmetal Alchemist)": {
-    icon:"⚔️", meta:"Anime · Fullmetal Alchemist: Brotherhood",
-    bio:"The Flame Alchemist hides genuine grief and moral complexity behind a mask of lazy ambition. His true goal — to become Führer and fix a broken military system from within — is one of FMA's most nuanced political storylines. The weight of what he did in the Ishvalan war haunts him throughout the series. His relationship with Hawkeye is considered anime's most understated and cherished pairing.",
-  },
-  "Nagato (Naruto)": {
-    icon:"⚔️", meta:"Anime · Naruto Shippuden",
-    bio:"Nagato was a war orphan who lost everything and arrived at a simple, terrible conclusion: the only way to make the world understand pain is to inflict it universally. His transformation from idealistic student to the god-like Pain is one of Naruto's most tragic arcs. His philosophy that peace requires understanding suffering is philosophically dense in a way unusual for shonen manga.",
-  },
-  "Kakashi Hatake (Naruto)": {
-    icon:"⚔️", meta:"Anime · Naruto",
-    bio:"Kakashi is perhaps the most skilled ninja of his generation — a man who copied over a thousand jutsu with his Sharingan eye and became known as the Copy Ninja. Beneath his lazily amused exterior is someone who has lost everyone he loved and carries tremendous guilt. He consistently tops Naruto character polls. His masked face became one of anime's greatest mysteries, finally revealed years after fans demanded it.",
-  },
-  "Pain (Naruto)": {
-    icon:"⚔️", meta:"Anime · Naruto Shippuden",
-    bio:"Pain is Nagato's instrument of divine punishment — six bodies controlled by a single man who has decided he is God. His attack on Konoha and the philosophical debate with Naruto that follows it is considered one of shonen anime's greatest confrontations. Pain argues his case with such conviction that readers genuinely question who is right. The Pain Arc regularly tops fan rankings of best Naruto storylines.",
-  },
-  "Obito Uchiha (Naruto)": {
-    icon:"⚔️", meta:"Anime · Naruto Shippuden",
-    bio:"Obito was once an optimistic boy who declared he would become Hokage — until a single devastating loss turned him into the most destructive force in the ninja world. His identity as the masked villain Tobi was one of Naruto's most shocking reveals. His final redemption, returning to the boy he once was in his last moments, is one of the series' most emotionally powerful sequences.",
-  },
-  "Jiraiya (Naruto)": {
-    icon:"⚔️", meta:"Anime · Naruto",
-    bio:"Jiraiya is the Toad Sage — legendary ninja, bestselling author, and the closest thing Naruto ever had to a grandfather. He spent his life believing in a prophecy of a child who would bring peace, and dedicated himself to that hope even after it had broken him repeatedly. His death is considered one of anime's most devastating moments. The phrase 'Never give up' was his life's work and Naruto's inheritance.",
-  },
-  "Madara Uchiha (Naruto)": {
-    icon:"⚔️", meta:"Anime · Naruto Shippuden",
-    bio:"Madara Uchiha lived through war after war until he concluded that the only way to bring peace was to trap all of humanity in an eternal dream. The most powerful shinobi who ever lived, he had already planned everything centuries before the main story begins. His entrance in the Fourth Ninja War — taking on entire armies alone — is one of shonen anime's most visually overwhelming sequences.",
-  },
-  "Ichigo Kurosaki (Bleach)": {
-    icon:"⚔️", meta:"Anime · Bleach",
-    bio:"Ichigo became a Soul Reaper by accident and spent the entire series fighting to protect the people around him — not out of duty or ideology, but raw personal loyalty. Creator Tite Kubo nearly ended Bleach after the Soul Society arc, considering it the natural conclusion. Fans' overwhelming response kept it running for another 15 years. The recent Thousand-Year Blood War anime adaptation was widely praised.",
-  },
-  "Hitsugaya Toshiro (Bleach)": {
-    icon:"⚔️", meta:"Anime · Bleach",
-    bio:"Hitsugaya is the youngest captain in Soul Society's history, commanding ice and snow with his zanpakuto Hyorinmaru. Despite being a relatively minor character in the plot, he won Bleach popularity polls so consistently that it baffled creator Kubo, who had planned far less screen time for him. He became a symbol of quiet, youthful competence in a series full of flamboyant personalities.",
-  },
-  "Matsumoto Rangiku (Bleach)": {
-    icon:"⚔️", meta:"Anime · Bleach",
-    bio:"Rangiku is Hitsugaya's lieutenant — cheerful, sake-loving, and easy to underestimate. Beneath her easy warmth is someone who has experienced profound loss and carries grief she rarely shows. Her relationship with Gin Ichimaru is one of Bleach's saddest storylines, and her quiet scenes of reflection contain some of the series' most emotionally honest moments.",
-  },
-  "Kenpachi Zaraki (Bleach)": {
-    icon:"⚔️", meta:"Anime · Bleach",
-    bio:"Kenpachi is the only Soul Reaper captain who achieved his rank through pure battle, with no knowledge of his zanpakuto's name or abilities. He lives entirely for fighting. Yet beneath his terrifying exterior is someone who adopted a small child out of loneliness and named himself after the most dangerous district in Soul Society. His growth across the series from mindless berserker to something more is quietly compelling.",
-  },
-  "Koro-sensei (Assassination Classroom)": {
-    icon:"⚔️", meta:"Anime · Assassination Classroom",
-    bio:"Koro-sensei is a tentacled, mach-20 creature who threatens to destroy Earth — and also teaches Class 3-E with complete devotion, knowing his students must eventually kill him. His central lesson: every student has worth, and a teacher's greatest achievement is to be surpassed by those they teach. Creator Yusei Matsui designed him as a metaphor for every mentor's need to be overcome by their students.",
-  },
-  "Dr. Hiriluk (One Piece)": {
-    icon:"⚔️", meta:"Anime · One Piece",
-    bio:"Dr. Hiriluk was a quack doctor on Drum Island who spent his life trying to cure people with no medical training — and failing most of the time. Yet his belief that people can be saved, and his sacrifice to prove it, inspired Chopper to become the Straw Hats' doctor. His death scene contains one of One Piece's most quoted lines about what it truly means for a person to die.",
-  },
-  "Kentaro Miura (Berserk)": {
-    icon:"📖", meta:"Manga Artist · 1966–2021",
-    bio:"Miura spent 32 years creating Berserk virtually alone, drawing every panel himself with extraordinary detail. A single chapter could take weeks. He passed away in May 2021 with the story unfinished — his close friend Kouji Mori is completing it from their conversations. Berserk directly inspired Dark Souls, Final Fantasy VII's Sephiroth, and generations of dark fantasy. Its art remains among the most detailed ever put to paper.",
-  },
-  "Takehiko Inoue (Vagabond)": {
-    icon:"📖", meta:"Manga Artist · Vagabond / Slam Dunk",
-    bio:"Inoue is the creator of both Vagabond and Slam Dunk — two of the greatest manga ever drawn. Vagabond is based on the real swordsman Miyamoto Musashi and is painted in watercolour rather than drawn in ink — an almost unheard-of technique. He won the Eisner Award. Since 2015, Vagabond has been on an indefinite hiatus as Inoue battles perfectionism that prevents him from continuing.",
-  },
-  "Makoto Yukimura (Vinland Saga)": {
-    icon:"📖", meta:"Manga Artist · Vinland Saga",
-    bio:"Yukimura began Vinland Saga as a direct response to the Iraq War — he wanted to examine whether violence ever truly resolves human problems. Set during the real Viking Age, his protagonist Thorfinn is based on actual Norse explorer Thorfinn Karlsefni who reached North America around 1010 AD. The manga's core message — that a true warrior needs no sword — takes hundreds of chapters of brutal combat to earn.",
-  },
-  "African Proverb": {
-    icon:"🌿", meta:"Oral Tradition · Pan-African",
-    bio:"African proverbs are living philosophy — not texts but living sayings passed orally through generations. Elders use them to settle disputes, counsel the young, and guide communities. They carry the collective wisdom of thousands of years in compact, memorable form. Many have no single author or origin — they belong to everyone. Their continued use across modern Africa proves that wisdom outlasts civilizations.",
-  },
-  "Japanese Proverb": {
-    icon:"🌿", meta:"Oral Tradition · Japan",
-    bio:"Japanese proverbs (kotowaza) blend Confucian wisdom, Buddhist philosophy, and indigenous Japanese thought into concise, memorable sayings. Many use nature imagery — seasons, water, mountains — reflecting Japan's deeply nature-connected worldview. The concept of wabi-sabi, finding beauty in imperfection, emerges from this tradition and has influenced art, design, and philosophy worldwide.",
-  },
-  "Swedish Proverb": {
-    icon:"🌿", meta:"Oral Tradition · Sweden",
-    bio:"Swedish proverbs reflect the Scandinavian values of community, modesty, and shared experience that have made Nordic countries among the world's most consistently happy. The concept of 'lagom' — just the right amount, not too much or too little — underlies much Swedish wisdom. Sweden consistently ranks in the top five of the UN World Happiness Report.",
-  },
-  "Yiddish Proverb": {
-    icon:"🌿", meta:"Oral Tradition · Ashkenazi Jewish",
-    bio:"Yiddish proverbs carry centuries of wisdom from a people who have survived persecution, displacement, and tragedy while maintaining wit, warmth, and community. Yiddish was spoken by up to 13 million people before World War II; around 600,000 speakers remain today. The proverbs are distinctive for combining sharp humor with profound insight — often both in the same sentence.",
-  },
-  "Arab Proverb": {
-    icon:"🌿", meta:"Oral Tradition · Arab World",
-    bio:"Arab proverbs draw from centuries of Bedouin wisdom, Islamic philosophy, and the accumulated experience of desert life. They place enormous value on hospitality, generosity, and community. The Arabic oral tradition is one of the world's richest — thousands of proverbs exist across dialects and regions, many predating Islam by centuries. Poetry and proverbs are considered the highest art form in classical Arabic culture.",
-  },
-  "Ogoni Proverb (Nigeria)": {
-    icon:"🌿", meta:"Oral Tradition · Ogoni People, Nigeria",
-    bio:"The Ogoni are a people of the Niger Delta in Nigeria with a rich oral tradition connecting them deeply to the land. They became internationally known in the 1990s when Ken Saro-Wiwa led environmental protests against oil company destruction of their homeland. Their proverbs, like all African oral traditions, carry the weight of community memory and ecological understanding built over many generations.",
-  },
-  "Makoto Naegi (Danganronpa)": {
-    icon:"⚔️", meta:"Anime · Danganronpa: Trigger Happy Havoc",
-    bio:"Makoto is the 'Ultimate Lucky Student' — his only distinguishing trait is luck — yet he becomes the emotional anchor of a group trapped in a death game designed to destroy hope. His stubborn belief in people, even after evidence suggests he shouldn't, is what separates survival from despair. Danganronpa was originally a visual novel before becoming an anime.",
-  },
-  "Kaede Akamatsu (Danganronpa)": {
-    icon:"⚔️", meta:"Anime · Danganronpa V3",
-    bio:"Kaede is the protagonist of Danganronpa V3 — an optimistic pianist who takes it upon herself to lead her classmates out of a killing game. Her early exit from the story is one of the series' most shocking moments. Her belief that feelings persist even when memories fade reflects Danganronpa V3's central theme about the nature of fiction, memory, and what makes experiences real.",
-  },
-  "Kino (Kino's Journey)": {
-    icon:"⚔️", meta:"Anime · Kino's Journey",
-    bio:"Kino is a young traveler who visits different countries on a motorrad (talking motorcycle) named Hermes, spending only three days in each place. Each country is a thought experiment — a utopia with a dark cost, a dystopia that functions perfectly, a society built on a single strange rule. Creator Keiichi Sigsawa wrote the original light novels as a university student, inspired by Voltaire's Candide.",
-  },
-  "Emma (The Promised Neverland)": {
-    icon:"⚔️", meta:"Anime · The Promised Neverland",
-    bio:"Emma is an 11-year-old who discovers the terrifying truth of her idyllic orphanage and decides not to leave a single child behind. Her combination of physical ability, emotional intelligence, and absolute refusal to accept the world as it is makes her one of shonen's most compelling protagonists. The Promised Neverland debuted in 2016 and became one of Shonen Jump's fastest-selling new series.",
-  },
-};
+async function loadQuotesData() {
+  const res = await fetch('quotes.json');
+  if (!res.ok) throw new Error('Failed to load quotes.json');
+  const data = await res.json();
+  QUOTES_DATA   = data.quotes;
+  ALL_SPEAKERS  = data.speakers;
+  AUTHOR_GROUPS = data.authorGroups;
+  SPEAKER_BIOS  = data.speakerBios || {};
+}
 
 // ══════════════════════════════════════════════════════════════════════════════
 // SOUND  (single shared AudioContext — required for reliable mobile audio)
@@ -1518,7 +1175,17 @@ function populateIntro() {
 // INIT — single DOMContentLoaded, every listener wired here
 // ══════════════════════════════════════════════════════════════════════════════
 document.addEventListener('DOMContentLoaded', () => {
+  // Load all quote data from JSON, then initialise the game
+  loadQuotesData().then(() => {
+    initGame();
+  }).catch(err => {
+    console.error('Failed to load quotes:', err);
+    // Fallback: try to init anyway (won't work offline without cache)
+    initGame();
+  });
+});
 
+function initGame() {
   // First launch vs returning player
   ensureMemberSince();
   if (!localStorage.getItem(K.onboarded)) {
@@ -1705,4 +1372,4 @@ document.addEventListener('DOMContentLoaded', () => {
     if (SFX.enabled) tone(440, .1, 'sine', .06);
   });
 
-});
+}
