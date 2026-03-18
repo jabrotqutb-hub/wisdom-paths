@@ -946,6 +946,18 @@ function resetState() {
   State.pool = shuffle(source.length >= 4 ? source : [...QUOTES_DATA]);
 }
 
+// Tracks all pending round timeouts so they can be cancelled
+const _pendingTimeouts = new Set();
+function safeTimeout(fn, ms) {
+  const id = setTimeout(() => { _pendingTimeouts.delete(id); fn(); }, ms);
+  _pendingTimeouts.add(id);
+  return id;
+}
+function cancelAllTimeouts() {
+  _pendingTimeouts.forEach(id => clearTimeout(id));
+  _pendingTimeouts.clear();
+}
+
 // ══════════════════════════════════════════════════════════════════════════════
 // HELPERS
 // ══════════════════════════════════════════════════════════════════════════════
@@ -1158,8 +1170,8 @@ function timeOut() {
   State.wrongCount++;
   o.classList.remove('hidden');
   clearTimeout(resultTimer); resultTimer=setTimeout(()=>o.classList.add('hidden'),1100);
-  if(!State.isEndless && State.lives<=0){setTimeout(endGame,1600);return;}
-  setTimeout(startRound,2200);
+  if(!State.isEndless && State.lives<=0){safeTimeout(endGame,1600);return;}
+  safeTimeout(startRound,2200);
 }
 
 function handleAnswer(clickedBtn, isCorrect) {
@@ -1202,7 +1214,7 @@ function handleAnswer(clickedBtn, isCorrect) {
       State.lives--;
       updateHUDHearts();
       showResult(false,0);
-      if(State.lives<=0){setTimeout(endGame,1600);return;}
+      if(State.lives<=0){safeTimeout(endGame,1600);return;}
     }
     playWrong();
     navigator.vibrate&&navigator.vibrate([60,30,60]);
@@ -1212,7 +1224,7 @@ function handleAnswer(clickedBtn, isCorrect) {
   const newAch = checkAchievements(State, State.dailyStreak, State.isEndless);
   newAch.forEach(ach => queueAchievementBanner(ach));
 
-  setTimeout(startRound, 2300);
+  safeTimeout(startRound, 2300);
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -1220,6 +1232,7 @@ function handleAnswer(clickedBtn, isCorrect) {
 // ══════════════════════════════════════════════════════════════════════════════
 function endGame() {
   Timer.stop();
+  cancelAllTimeouts();
   const rank=getRank(State.score);
   const accuracy=State.correctCount+State.wrongCount>0
     ?Math.round((State.correctCount/(State.correctCount+State.wrongCount))*100):0;
@@ -1422,9 +1435,27 @@ function startGame() {
   // Reset achievement queue for new game
   _achQueue = []; _achShowing = false;
 
+  // Cancel any lingering background timeouts from previous game
+  cancelAllTimeouts();
+  Timer.stop();
+
   resetState();
+
+  // Reset HUD display to match fresh state
+  $('score').textContent  = '0';
+  $('streak').textContent = '0';
+  $('score').classList.remove('pop');
+  $('streak').classList.remove('pop');
+  $('hearts').querySelectorAll('.heart').forEach(h => {
+    h.classList.remove('lost', 'shake');
+  });
+  $('overlayResult').classList.add('hidden');
+  $('overlayLegendary').classList.add('hidden');
+  $('comboBanner').classList.remove('show');
+  $('comboBanner').classList.add('hidden');
+
   showScreen('screenGame');
-  setTimeout(startRound,300);
+  safeTimeout(startRound, 300);
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
