@@ -437,17 +437,28 @@ document.addEventListener('click',      unlockAudio, { once: true });
 function tone(freq, dur, type='sine', vol=0.12) {
   if (!SFX.enabled) return;
   try {
-    const ctx  = getAudioCtx();
-    const osc  = ctx.createOscillator();
-    const gain = ctx.createGain();
-    osc.connect(gain);
-    gain.connect(ctx.destination);
-    osc.type = type;
-    osc.frequency.setValueAtTime(freq, ctx.currentTime);
-    gain.gain.setValueAtTime(vol, ctx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + dur);
-    osc.start(ctx.currentTime);
-    osc.stop(ctx.currentTime + dur);
+    const ctx = getAudioCtx();
+    const play = () => {
+      try {
+        const osc  = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, ctx.currentTime);
+        gain.gain.setValueAtTime(vol, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + dur);
+        osc.start(ctx.currentTime);
+        osc.stop(ctx.currentTime + dur);
+      } catch(e) {}
+    };
+    // If context is already running, play immediately
+    // If suspended, wait for resume() to complete first
+    if (ctx.state === 'running') {
+      play();
+    } else {
+      ctx.resume().then(play);
+    }
   } catch(e) {}
 }
 const playCorrect   = () => { tone(523,.15,'sine',.12); setTimeout(()=>tone(659,.2,'sine',.1),100); setTimeout(()=>tone(784,.3,'sine',.08),200); };
