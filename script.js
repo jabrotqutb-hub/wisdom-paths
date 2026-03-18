@@ -400,25 +400,68 @@ const SPEAKER_BIOS = {
 };
 
 // ══════════════════════════════════════════════════════════════════════════════
-// SOUND
+// SOUND  (single shared AudioContext — required for reliable mobile audio)
 // ══════════════════════════════════════════════════════════════════════════════
 const SFX = { enabled: true };
+let _audioCtx = null;
+
+function getAudioCtx() {
+  if (!_audioCtx) {
+    _audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  }
+  // Mobile suspends the context automatically — resume it on every call
+  if (_audioCtx.state === 'suspended') {
+    _audioCtx.resume();
+  }
+  return _audioCtx;
+}
+
+// Unlock audio on very first user interaction (critical for mobile)
+function unlockAudio() {
+  if (_audioCtx) return;
+  _audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  // Play a silent buffer to fully unlock
+  const buf = _audioCtx.createBuffer(1, 1, 22050);
+  const src = _audioCtx.createBufferSource();
+  src.buffer = buf;
+  src.connect(_audioCtx.destination);
+  src.start(0);
+  document.removeEventListener('touchstart', unlockAudio);
+  document.removeEventListener('touchend',   unlockAudio);
+  document.removeEventListener('click',      unlockAudio);
+}
+document.addEventListener('touchstart', unlockAudio, { once: true });
+document.addEventListener('touchend',   unlockAudio, { once: true });
+document.addEventListener('click',      unlockAudio, { once: true });
+
 function tone(freq, dur, type='sine', vol=0.12) {
   if (!SFX.enabled) return;
   try {
-    const ctx  = new (window.AudioContext || window.webkitAudioContext)();
-    const osc  = ctx.createOscillator();
-    const gain = ctx.createGain();
-    osc.connect(gain); gain.connect(ctx.destination);
-    osc.type = type;
-    osc.frequency.setValueAtTime(freq, ctx.currentTime);
-    gain.gain.setValueAtTime(vol, ctx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + dur);
-    osc.start(); osc.stop(ctx.currentTime + dur);
-    setTimeout(() => ctx.close(), (dur + 0.1) * 1000);
+    const ctx = getAudioCtx();
+    const play = () => {
+      try {
+        const osc  = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, ctx.currentTime);
+        gain.gain.setValueAtTime(vol, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + dur);
+        osc.start(ctx.currentTime);
+        osc.stop(ctx.currentTime + dur);
+      } catch(e) {}
+    };
+    // If context is already running, play immediately
+    // If suspended, wait for resume() to complete first
+    if (ctx.state === 'running') {
+      play();
+    } else {
+      ctx.resume().then(play);
+    }
   } catch(e) {}
 }
-const playCorrect   = () => { tone(523,.15,'sine',.12); setTimeout(()=>tone(659,.2,'sine',.1),100); setTimeout(()=>tone(784,.3,'sine',.08),200); };
+const playCorrect   = () => { tone(523,.15,'triangle',.35); setTimeout(()=>tone(659,.2,'triangle',.3),100); setTimeout(()=>tone(784,.3,'triangle',.25),200); };
 const playWrong     = () => { tone(200,.3,'sawtooth',.08); setTimeout(()=>tone(160,.3,'sawtooth',.06),150); };
 const playPageTurn  = () => { tone(800,.08,'sine',.04); setTimeout(()=>tone(1000,.06,'sine',.03),60); };
 const playClick     = () => tone(440,.05,'sine',.06);
@@ -1196,18 +1239,19 @@ function handleAnswer(clickedBtn, isCorrect) {
     State.score+=pts;
     $('score').textContent=State.score; popEl('score');
     $('streak').textContent=State.streak; popEl('streak');
-    showCombo(State.streak); showResult(true,pts); playCorrect();
+    playCorrect();
+    showCombo(State.streak); showResult(true,pts);
     navigator.vibrate&&navigator.vibrate(50);
   } else {
     State.streak=0; State.wrongCount++;
     $('streak').textContent=0;
+    playWrong();
+    navigator.vibrate&&navigator.vibrate([60,30,60]);
     if(State.isEndless){
-      // Endless: deduct points instead of losing lives
       const penalty = 10;
       State.score = Math.max(0, State.score - penalty);
       $('score').textContent=State.score;
       showResult(false, 0);
-      // Override result points label to show penalty
       $('resultPoints').textContent='−10 pts';
       $('resultPoints').style.color='var(--wrong)';
     } else {
@@ -1216,8 +1260,6 @@ function handleAnswer(clickedBtn, isCorrect) {
       showResult(false,0);
       if(State.lives<=0){safeTimeout(endGame,1600);return;}
     }
-    playWrong();
-    navigator.vibrate&&navigator.vibrate([60,30,60]);
   }
 
   // Check achievements after every answer
