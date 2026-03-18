@@ -400,22 +400,54 @@ const SPEAKER_BIOS = {
 };
 
 // ══════════════════════════════════════════════════════════════════════════════
-// SOUND
+// SOUND  (single shared AudioContext — required for reliable mobile audio)
 // ══════════════════════════════════════════════════════════════════════════════
 const SFX = { enabled: true };
+let _audioCtx = null;
+
+function getAudioCtx() {
+  if (!_audioCtx) {
+    _audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  }
+  // Mobile suspends the context automatically — resume it on every call
+  if (_audioCtx.state === 'suspended') {
+    _audioCtx.resume();
+  }
+  return _audioCtx;
+}
+
+// Unlock audio on very first user interaction (critical for mobile)
+function unlockAudio() {
+  if (_audioCtx) return;
+  _audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  // Play a silent buffer to fully unlock
+  const buf = _audioCtx.createBuffer(1, 1, 22050);
+  const src = _audioCtx.createBufferSource();
+  src.buffer = buf;
+  src.connect(_audioCtx.destination);
+  src.start(0);
+  document.removeEventListener('touchstart', unlockAudio);
+  document.removeEventListener('touchend',   unlockAudio);
+  document.removeEventListener('click',      unlockAudio);
+}
+document.addEventListener('touchstart', unlockAudio, { once: true });
+document.addEventListener('touchend',   unlockAudio, { once: true });
+document.addEventListener('click',      unlockAudio, { once: true });
+
 function tone(freq, dur, type='sine', vol=0.12) {
   if (!SFX.enabled) return;
   try {
-    const ctx  = new (window.AudioContext || window.webkitAudioContext)();
+    const ctx  = getAudioCtx();
     const osc  = ctx.createOscillator();
     const gain = ctx.createGain();
-    osc.connect(gain); gain.connect(ctx.destination);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
     osc.type = type;
     osc.frequency.setValueAtTime(freq, ctx.currentTime);
     gain.gain.setValueAtTime(vol, ctx.currentTime);
     gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + dur);
-    osc.start(); osc.stop(ctx.currentTime + dur);
-    setTimeout(() => ctx.close(), (dur + 0.1) * 1000);
+    osc.start(ctx.currentTime);
+    osc.stop(ctx.currentTime + dur);
   } catch(e) {}
 }
 const playCorrect   = () => { tone(523,.15,'sine',.12); setTimeout(()=>tone(659,.2,'sine',.1),100); setTimeout(()=>tone(784,.3,'sine',.08),200); };
