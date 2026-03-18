@@ -1196,18 +1196,19 @@ function handleAnswer(clickedBtn, isCorrect) {
     State.score+=pts;
     $('score').textContent=State.score; popEl('score');
     $('streak').textContent=State.streak; popEl('streak');
-    showCombo(State.streak); showResult(true,pts); playCorrect();
+    playCorrect();
+    showCombo(State.streak); showResult(true,pts);
     navigator.vibrate&&navigator.vibrate(50);
   } else {
     State.streak=0; State.wrongCount++;
     $('streak').textContent=0;
+    playWrong();
+    navigator.vibrate&&navigator.vibrate([60,30,60]);
     if(State.isEndless){
-      // Endless: deduct points instead of losing lives
       const penalty = 10;
       State.score = Math.max(0, State.score - penalty);
       $('score').textContent=State.score;
       showResult(false, 0);
-      // Override result points label to show penalty
       $('resultPoints').textContent='−10 pts';
       $('resultPoints').style.color='var(--wrong)';
     } else {
@@ -1216,8 +1217,6 @@ function handleAnswer(clickedBtn, isCorrect) {
       showResult(false,0);
       if(State.lives<=0){safeTimeout(endGame,1600);return;}
     }
-    playWrong();
-    navigator.vibrate&&navigator.vibrate([60,30,60]);
   }
 
   // Check achievements after every answer
