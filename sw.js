@@ -7,13 +7,14 @@ const CACHE_NAME = 'wisdom-paths-v1';
 
 // Everything the app needs to run offline
 const ASSETS_TO_CACHE = [
-  '/',
-  '/index.html',
-  '/style.css',
-  '/script.js',
-  '/manifest.json',
-  '/icons/icon-192x192.png',
-  '/icons/icon-512x512.png',
+  '/wisdom-paths/',
+  '/wisdom-paths/index.html',
+  '/wisdom-paths/style.css',
+  '/wisdom-paths/script.js',
+  '/wisdom-paths/quotes.json',
+  '/wisdom-paths/manifest.json',
+  '/wisdom-paths/icons/icon-192x192.png',
+  '/wisdom-paths/icons/icon-512x512.png',
 ];
 
 // ── Install: cache all assets ─────────────────────────────────────────────────
