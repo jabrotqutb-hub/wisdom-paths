@@ -62,8 +62,8 @@
       <div class="intro-divider"><span>✦</span></div>
       <p class="intro-desc">Philosophers, warriors, sages &amp; legends.<br>Can you tell who spoke the words?</p>
       <div class="intro-stats">
-        <div class="stat-pill">131 Quotes</div>
-        <div class="stat-pill">58 Speakers</div>
+        <div class="stat-pill">194 Quotes</div>
+        <div class="stat-pill">97 Speakers</div>
         <div class="stat-pill">5 Worlds</div>
       </div>
       <button class="btn-primary" id="btnStart">BEGIN JOURNEY</button>
@@ -436,7 +436,7 @@
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js').catch(() => {});
+        navigator.serviceWorker.register('./sw.js').catch(() => {});
       });
     }
   </script>
